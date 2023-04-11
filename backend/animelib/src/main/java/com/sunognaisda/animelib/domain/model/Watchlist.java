@@ -1,24 +1,25 @@
 package com.sunognaisda.animelib.domain.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "watchlist")
+@TableName("watchlist")
 public class Watchlist {
-    @Id
+    @TableId(type = IdType.ASSIGN_UUID)
     private String id;
 
-    @Column(name = "user_id", nullable = false)
+    @TableField("user_id")
     private Integer user_id;
 
-    @Column(name = "anime_id", nullable = false)
+    @TableField("anime_id")
     private Integer anime_id;
 }
 

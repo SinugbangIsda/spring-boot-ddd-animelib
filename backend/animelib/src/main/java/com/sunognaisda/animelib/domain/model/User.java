@@ -1,23 +1,27 @@
 package com.sunognaisda.animelib.domain.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user")
+@TableName("user")
 public class User {
-    @Id
+    @TableId(type = IdType.ASSIGN_ID)
     private String id;
 
-    @Column(name = "username", length = 20, nullable = false)
-    private String username;
+    @TableField("last_name")
+    private String last_name;
 
-    @Column(name = "password", nullable = false)
+    @TableField("first_name")
+    private String first_name;
+
+    @TableField("password")
     private String password;
 }

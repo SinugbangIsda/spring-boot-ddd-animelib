@@ -10,11 +10,9 @@ import java.util.UUID;
 
 @Service
 public class WatchlistServiceImpl implements WatchlistService {
-    @Autowired
-    private WatchlistRepository watchlistRepository;
     @Override
     public Watchlist addWatchlist(Watchlist wl) {
         wl.setId(UUID.randomUUID().toString());
-        return watchlistRepository.save(wl);
+        return null;
     }
 }
