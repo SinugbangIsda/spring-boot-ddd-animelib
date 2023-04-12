@@ -39,6 +39,6 @@ public class Anime {
     @TableField("synopsis")
     private String synopsis;
 
-    @TableField("image_url")
+    @TableField("image_uri")
     private String image_uri;
 }
