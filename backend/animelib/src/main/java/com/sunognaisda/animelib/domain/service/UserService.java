@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-    User registerUser(User user);
+    void registerUser(User user);
+
+    Object getUserById(long user_id);
 
 }
