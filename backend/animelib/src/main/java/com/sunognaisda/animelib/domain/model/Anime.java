@@ -21,6 +21,9 @@ public class Anime {
     @TableField("title")
     private String title;
 
+    @TableField("alt_title")
+    private String alt_title;
+
     @TableField("type")
     private String type;
 
