@@ -27,6 +27,9 @@ public class Anime {
     @TableField("episodes")
     private Integer episodes;
 
+    @TableField("status")
+    private String status;
+
     @TableField("genre")
     private String genre;
 
