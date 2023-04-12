@@ -3,11 +3,6 @@ import { Actions } from "../types";
 
 export const AppReducer = (state: GlobalContextProps, action: Actions) => {
     switch (action.type) {
-        case "LOGIN_START":
-            return { 
-                ...state 
-            };
-
         case "LOGIN_SUCCESS":
             return { 
                 ...state, 
