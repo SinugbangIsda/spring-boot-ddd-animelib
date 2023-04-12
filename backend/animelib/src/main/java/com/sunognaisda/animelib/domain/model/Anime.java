@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName("anime")
 public class Anime {
-    @TableId(type = IdType.ASSIGN_UUID)
-    private String id;
+    @TableId(type = IdType.ASSIGN_ID)
+    private long id;
 
     @TableField("title")
     private String title;
