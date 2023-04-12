@@ -5,6 +5,28 @@ import React, {
 import { AppLayoutProps } from '../../interfaces';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../../context/global';
+import { IoBookmark, MdMovieFilter } from "react-icons/all";
+
+const NavItems = [
+  {
+    name: "Anime List",
+    path: "/",
+    icon: 
+      <MdMovieFilter
+        aria-hidden = "true"
+        className = "flex-shrink-0 w-6 h-6 transition duration-75 group-hover:text-white"
+      />
+  },
+  {
+    name: "Watchlist",
+    path: "/watchlist",
+    icon: 
+      <IoBookmark 
+        aria-hidden = "true" 
+        className = "flex-shrink-0 w-6 h-6  transition duration-75  group-hover:text-white" 
+      /> 
+  }
+];
 
 const AppLayout = ({ children }: AppLayoutProps) => {
   return (
