@@ -1,7 +1,5 @@
 package com.sunognaisda.animelib.domain.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -15,14 +13,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName("watchlist")
 public class Watchlist {
-    @TableId(type = IdType.ASSIGN_UUID)
-    private String id;
+    @TableId("user_id")
+    private long user_id;
 
-    @TableField("user_id")
-    private Integer user_id;
-
-    @TableField("anime_id")
-    private Integer anime_id;
+    @TableId("anime_id")
+    private long anime_id;
 }
 
 
