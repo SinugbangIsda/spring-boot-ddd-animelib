@@ -34,12 +34,12 @@ const Signup = () => {
 
   if (userId === null) {
     return (
-      <section className = "min-h-screen bg-[#22272E]">
+      <section className = "min-h-screen bg-[#141517]">
         <div className = " flex flex-col items-center justify-center px-6 py-8 mx-auto space-y-8 grow">
           <p className = "text-white font-bold text-4xl text-center select-none">
             Anime<span className = "text-[#E6613E]">Lib</span>
           </p>
-          <div className = "w-full bg-[#2D333B] rounded-lg border-2 border-[#444C56] md:mt-0 sm:max-w-md xl:p-0">
+          <div className = "w-full bg-[#1A1B1E] rounded-lg border-2 border-[#383a40] md:mt-0 sm:max-w-md xl:p-0">
             <div className = "p-6 space-y-4 md:space-y-6 sm:p-8">
               <p className = "text-xl font-bold leading-tight tracking-tight text-center text-white">
                 Create your account
@@ -62,7 +62,7 @@ const Signup = () => {
                       type = "text" 
                       name = "firstname" 
                       id = "firstname" 
-                      className = "block w-full p-2.5 bg-[#373E47] border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 rounded-lg" 
+                      className = "block w-full p-2.5 bg-[#25262B] border-2 border-[#383a40] placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 rounded-lg" 
                       placeholder = "James" 
                       required
                       value = { formState.firstName }
@@ -83,7 +83,7 @@ const Signup = () => {
                       type = "text" 
                       name = "lastname" 
                       id = "lastname" 
-                      className = "block w-full p-2.5 bg-[#373E47] border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 rounded-lg" 
+                      className = "block w-full p-2.5 bg-[#25262B] border-2 border-[#383a40] placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 rounded-lg" 
                       placeholder = "Weed" 
                       required
                       value = { formState.lastName }
@@ -105,7 +105,7 @@ const Signup = () => {
                     type = "email" 
                     name = "email" 
                     id = "email" 
-                    className = "block w-full p-2.5 bg-[#373E47] border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 rounded-lg" 
+                    className = "block w-full p-2.5 bg-[#25262B] border-2 border-[#383a40] placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 rounded-lg" 
                     placeholder = "name@company.com" 
                     required
                     value = { formState.email }
@@ -127,7 +127,7 @@ const Signup = () => {
                     name = "password" 
                     id = "password" 
                     placeholder = "••••••••" 
-                    className = "block w-full p-2.5 bg-[#373E47] border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 rounded-lg" 
+                    className = "block w-full p-2.5 bg-[#25262B] border-2 border-[#383a40] placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 rounded-lg" 
                     required
                     value = { formState.password }
                     onChange = {(e) => setFormState({

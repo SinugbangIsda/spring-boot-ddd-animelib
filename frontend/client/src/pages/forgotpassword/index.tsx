@@ -22,12 +22,12 @@ const ForgotPassword = () => {
   };
 
   return (
-    <section className = "min-h-screen bg-[#22272E]">
-        <div className ="flex flex-col items-center justify-center px-6 py-8 mx-auto space-y-8 md:h-screen lg:py-0">
+    <section className = "min-h-screen bg-[#141517]">
+        <div className = "flex flex-col items-center justify-center px-6 py-8 mx-auto space-y-8 md:h-screen lg:py-0">
           <p className = "text-white font-bold text-4xl hover:cursor-pointer text-center">
             Anime<span className = "text-[#E6613E]">Lib</span>
           </p>
-          <div className ="w-full bg-[#2D333B] rounded-lg border-2 border-[#444C56] md:mt-0 sm:max-w-md xl:p-0">
+          <div className ="w-full bg-[#1A1B1E] rounded-lg border-2 border-[#444C56] md:mt-0 sm:max-w-md xl:p-0">
             <div className ="p-6 space-y-4 md:space-y-6 sm:p-8">
               <p className = "text-xl font-bold leading-tight tracking-tight text-center text-white">
                 Forgot Password
@@ -41,7 +41,7 @@ const ForgotPassword = () => {
                 <div>
                   <label 
                     htmlFor = "email" 
-                    className = "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className = "block mb-2 text-sm font-medium text-white"
                   >
                     Email Address
                   </label>
@@ -49,7 +49,7 @@ const ForgotPassword = () => {
                     type = "email"
                     name = "email" 
                     id = "email" 
-                    className = "block w-full p-2.5 bg-[#373E47] border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 rounded-lg" 
+                    className = "block w-full p-2.5 bg-[#25262B] border-2 border-[#383a40] placeholder-gray-400 text-white rounded-lg" 
                     placeholder = "name@company.com" 
                     required
                     value = { formState.email }
