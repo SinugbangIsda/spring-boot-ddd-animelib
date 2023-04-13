@@ -21,6 +21,12 @@ const Signin = () => {
 
   const handleSigninWithGoogle = () => {
     console.log("Signin with Google");
+    dispatch({
+      type: "LOGIN_SUCCESS",
+      payload: {
+        userId: "1234567890"
+      }
+    });
   }
 
   const handleSigninWithEmail = () => {
