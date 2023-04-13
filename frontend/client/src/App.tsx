@@ -11,6 +11,7 @@ const Watchlist = lazyLoad(() => import('./pages/watchlist'));
 const Error404 = lazyLoad(() => import('./pages/error404'));
 const NewForm = lazyLoad(() => import('./pages/newform'));
 const ForgotPassword = lazyLoad(() => import('./pages/forgotpassword'));
+const SelectedAnime = lazyLoad(() => import('./pages/anime'));
 
 const App = () => {
   return (
@@ -41,6 +42,14 @@ const App = () => {
             path = "/forgotpassword"
             element = {
               <ForgotPassword />
+            }
+          />
+          <Route
+            path = "/anime/:animeId"
+            element = {
+              <PrivateRoute>
+                <SelectedAnime />
+              </PrivateRoute>
             }
           />
           <Route
