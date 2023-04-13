@@ -1,61 +1,83 @@
-import React, { useContext } from 'react'
+import React, { 
+  useContext,
+  useState
+} from 'react'
 import AppLayout from '../../components/applayout';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../../context/global';
+import AnimeCard from '../../components/animecard';
+import { AnimeList } from '../../interfaces';
+import { useDisclosure } from '@mantine/hooks';
+import { Modal } from '@mantine/core';
 
+const DUMMY_DATA = [
+  {
+    animeId: "1",
+    title: "One Piece",
+    animeType: "TV",
+    coverImageUri: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/28cfcb04-4005-4a10-8051-bf7232b0adb1/d5z2zrr-e7e3e6ac-ff4e-40fa-82ee-3b83aa73d7c6.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzI4Y2ZjYjA0LTQwMDUtNGExMC04MDUxLWJmNzIzMmIwYWRiMVwvZDV6Mnpyci1lN2UzZTZhYy1mZjRlLTQwZmEtODJlZS0zYjgzYWE3M2Q3YzYuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.VUknMN84J2v8_BDZnGKwoy8QTDusj4KGGZesAl0nxhs"
+  },
+  {
+    animeId: "2",
+    title: "Naruto Shippuden",
+    animeType: "TV",
+    coverImageUri: "https://m.media-amazon.com/images/M/MV5BZGFiMWFhNDAtMzUyZS00NmQ2LTljNDYtMmZjNTc5MDUxMzViXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg"
+  }
+]
 const Dashboard = () => {
+  const [ opened, { open, close }] = useDisclosure(false);
   return (
     <AppLayout>
-      <div className="p-4 sm:ml-64">
-   <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-      <div className="grid grid-cols-3 gap-4 mb-4">
-         <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-            <p className="text-2xl text-gray-400 dark:text-gray-500">+</p>
-         </div>
-         <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-            <p className="text-2xl text-gray-400 dark:text-gray-500">+</p>
-         </div>
-         <div className="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-            <p className="text-2xl text-gray-400 dark:text-gray-500">+</p>
-         </div>
-      </div>
-      <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-         <p className="text-2xl text-gray-400 dark:text-gray-500">+</p>
-      </div>
-      <div className="grid grid-cols-2 gap-4 mb-4">
-         <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p className="text-2xl text-gray-400 dark:text-gray-500">+</p>
-         </div>
-         <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p className="text-2xl text-gray-400 dark:text-gray-500">+</p>
-         </div>
-         <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p className="text-2xl text-gray-400 dark:text-gray-500">+</p>
-         </div>
-         <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p className="text-2xl text-gray-400 dark:text-gray-500">+</p>
-         </div>
-      </div>
-      <div className="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-         <p className="text-2xl text-gray-400 dark:text-gray-500">+</p>
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-         <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p className="text-2xl text-gray-400 dark:text-gray-500">+</p>
-         </div>
-         <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p className="text-2xl text-gray-400 dark:text-gray-500">+</p>
-         </div>
-         <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p className="text-2xl text-gray-400 dark:text-gray-500">+</p>
-         </div>
-         <div className="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p className="text-2xl text-gray-400 dark:text-gray-500">+</p>
-         </div>
-      </div>
-   </div>
-</div>
-
+      <section className = "space-y-4">
+        <div className = "flex flex-row justify-between items-center">
+          <input 
+            className = "w-1/3 p-2.5 bg-[#25262B] border-2 border-[#383a40] placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 rounded-lg" 
+            type = "text"
+            placeholder = "Search Anime"
+          />
+          <button 
+            className = "text-white bg-[#E6613E] hover:bg-[#d44f2e] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 select-none"
+            type = "button"
+            onClick = { open }
+          >
+            Add Anime
+          </button>
+        </div>
+        <div className = "flex flex-row justify-start items-center space-x-10">
+          { DUMMY_DATA.map((anime: AnimeList) => (
+            <Link 
+              key = { anime.animeId }
+              to = { `/anime/${anime.animeId}` }
+            >
+              <AnimeCard 
+                animeId = { anime.animeId }
+                title = { anime.title }
+                animeType = { anime.animeType }
+                coverImageUri = { anime.coverImageUri }
+              />
+            </Link>
+          ))}
+        </div>
+      </section>
+      <Modal 
+        opened = { opened } 
+        onClose = { close }
+        title = "Add Anime"
+        centered
+        styles={{
+          header :{
+            backgroundColor: '#373E47',
+            color: '#fff'
+          },
+          body: {
+            backgroundColor: '#373E47',
+            color: '#fff'
+          },
+        }}
+                    
+      >
+        asdas
+      </Modal>
     </AppLayout>
   )
 }
