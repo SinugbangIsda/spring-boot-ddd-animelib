@@ -13,7 +13,7 @@ export interface GlobalProviderProps {
 }
 
 export interface User {
-    user_id: string | null;
+    userId: string | null;
     refreshToken: string | null;
     emailAddress: string | null;
     username: string | null;

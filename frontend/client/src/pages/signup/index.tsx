@@ -16,7 +16,7 @@ const INITIAL_FORM_STATE = {
 const Signup = () => {
   const [ formState, setFormState ] = useState(INITIAL_FORM_STATE);
   const { data } = useContext(GlobalContext);
-  const { user_id  } = data;
+  const { userId  } = data;
 
   const handleSignupWithGoogle = () => {
     console.log("Signup with Google");
@@ -32,7 +32,7 @@ const Signup = () => {
     handleSignupWithEmail();
   }
 
-  if (user_id === null) {
+  if (userId === null) {
     return (
       <section className = "min-h-screen bg-[#22272E]">
         <div className = " flex flex-col items-center justify-center px-6 py-8 mx-auto space-y-8 grow">

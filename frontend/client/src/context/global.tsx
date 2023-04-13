@@ -5,7 +5,7 @@ import { AppReducer } from "./reducer";
 
 const INITIAL_STATE: GlobalContextProps = {
     data: { 
-        user_id: null, 
+        userId: null, 
         refreshToken: null, 
         emailAddress: null,
         username: null,
@@ -26,7 +26,7 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
         <GlobalContext.Provider 
             value = {{
                 data: { 
-                    user_id: state.data.user_id,
+                    userId: state.data.userId,
                     refreshToken: state.data.refreshToken,
                     emailAddress: state.data.emailAddress,
                     username: state.data.username,

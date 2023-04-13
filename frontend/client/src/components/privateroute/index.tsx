@@ -9,11 +9,11 @@ import { GlobalContext } from "../../context/global";
 
 const PrivateRoute = ({ children }: any) => {
     const { data, dispatch } = useContext(GlobalContext);
-    const { user_id } = data
+    const { userId } = data
 
     const auth = () => {
-        if (user_id === null) return false;
-        if (user_id !== null) {
+        if (userId === null) return false;
+        if (userId !== null) {
         //   const { token } = JSON.parse(localStorage.getItem("user"));
         //   const expiresIn = jwt_decode(token).exp * 1000;
         //   const currentDate = new Date();

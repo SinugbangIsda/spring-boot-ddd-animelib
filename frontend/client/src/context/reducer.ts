@@ -7,7 +7,7 @@ export const AppReducer = (state: GlobalContextProps, action: Actions) => {
             return { 
                 ...state, 
                 data: { 
-                    user_id: action.payload,
+                    userId: action.payload,
                     refreshToken: action.payload,
                     emailAddress: action.payload,
                     username: action.payload,
@@ -25,7 +25,7 @@ export const AppReducer = (state: GlobalContextProps, action: Actions) => {
             return { 
                 ...state, 
                 data: { 
-                    user_id: null,
+                    userId: null,
                     refreshToken: null,
                     emailAddress: null,
                     username: null,
