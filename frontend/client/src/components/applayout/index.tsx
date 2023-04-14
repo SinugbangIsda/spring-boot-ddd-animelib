@@ -121,7 +121,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           hidden = { !navbarOpen } 
           width = {{ 
             sm: 200, 
-            lg: 300 
+            lg: 250 
           }}
           className = "bg-[#141517] border-[#1A1B1E]"
         >
@@ -129,7 +129,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             <Link
               key = { index }
               to = { `${item.path}` }
-              className = "flex flex-row items-center p-2 rounded-lg text-white hover:bg-[#25262b] space-x-4 text-md select-none"
+              className = "flex flex-row justify-center items-center p-2 rounded-lg text-white hover:bg-[#25262b] space-x-4 text-md select-none"
             >
               { item.icon }
               <p>
