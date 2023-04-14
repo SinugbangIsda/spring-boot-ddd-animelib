@@ -129,7 +129,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             <Link
               key = { index }
               to = { `${item.path}` }
-              className = "flex flex-row items-center p-2 rounded-lg text-white hover:bg-[#25262b] space-x-4 text-lg select-none"
+              className = "flex flex-row items-center p-2 rounded-lg text-white hover:bg-[#25262b] space-x-4 text-md select-none"
             >
               { item.icon }
               <p>
