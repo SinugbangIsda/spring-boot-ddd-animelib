@@ -42,7 +42,7 @@ const Signin = () => {
   if (userId === null) {
     return (
       <section className = "min-h-screen bg-[#141517]">
-        <div className ="flex flex-col items-center justify-center px-6 py-8 mx-auto space-y-8 md:h-screen lg:py-0">
+        <div className ="flex flex-col items-center justify-center px-6 py-8 mx-auto space-y-8">
           <p className = "text-white font-bold text-4xl select-none text-center">
             Anime<span className = "text-[#E6613E]">Lib</span>
           </p>
