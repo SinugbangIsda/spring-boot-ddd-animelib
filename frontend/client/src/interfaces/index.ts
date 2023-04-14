@@ -16,7 +16,7 @@ export interface User {
     userId: string | null;
     refreshToken: string | null;
     emailAddress: string | null;
-    username: string | null;
+    fullname: string | null;
     profileImageUri: string | null;
 }
 
@@ -39,3 +39,20 @@ export interface AnimeList {
     animeType: string;
 }
 
+export interface TextInputProps {
+    label: string;
+    type: string;
+    withAsterisk?: boolean;
+    error: string | null;
+    disabled?: boolean;
+    icon?: JSX.Element | JSX.Element[] | null;
+    iconWidth?: string | number | null;
+    inputWrapperOrder?: "input" | "label" | "error" | "description";
+    radius?: number | "xs" | "sm" | "md" | "lg" | "xl";
+    required?: boolean;
+    rightSection?: JSX.Element | JSX.Element[] | null;
+    size: "xs" | "sm" | "md" | "lg" | "xl";
+    variant: "unstyled" | "default" | "filled"
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}

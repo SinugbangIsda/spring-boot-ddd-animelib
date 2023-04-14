@@ -8,7 +8,7 @@ const INITIAL_STATE: GlobalContextProps = {
         userId: null, 
         refreshToken: null, 
         emailAddress: null,
-        username: null,
+        fullname: null,
         profileImageUri: null,
     },
     error: null,
@@ -29,7 +29,7 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
                     userId: state.data.userId,
                     refreshToken: state.data.refreshToken,
                     emailAddress: state.data.emailAddress,
-                    username: state.data.username,
+                    fullname: state.data.fullname,
                     profileImageUri: state.data.profileImageUri
                 },
                 error: state.error,
