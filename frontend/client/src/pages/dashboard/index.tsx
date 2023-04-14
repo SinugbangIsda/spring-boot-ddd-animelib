@@ -35,13 +35,6 @@ const Dashboard = () => {
             type = "text"
             placeholder = "Search Anime"
           />
-          <button 
-            className = "text-white bg-[#E6613E] hover:bg-[#d44f2e] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 select-none"
-            type = "button"
-            onClick = { open }
-          >
-            Add Anime
-          </button>
         </div>
         <div className = "flex flex-row justify-start items-center space-x-10">
           { DUMMY_DATA.map((anime: AnimeList) => (
