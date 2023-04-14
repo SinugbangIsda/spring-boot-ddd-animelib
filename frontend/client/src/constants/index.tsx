@@ -1,3 +1,3 @@
 export const BASE_URLS = {
-    api: ""
+    api: "http://localhost:8123/api/v1"
 }
