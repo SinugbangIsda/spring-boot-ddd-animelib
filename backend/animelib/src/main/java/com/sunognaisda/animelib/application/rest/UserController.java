@@ -1,6 +1,5 @@
 package com.sunognaisda.animelib.application.rest;
 
-import cn.hutool.json.JSONObject;
 import com.sunognaisda.animelib.domain.model.User;
 import com.sunognaisda.animelib.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,13 @@ public class UserController {
     }
 
     @GetMapping("{user_id}")
-    public Object getUserById(@PathVariable("user_id") long user_id) {
-        return userService.getUserById(user_id);
+    public User loginUser(@PathVariable("user_id") long userId) {
+        return userService.loginUser(userId);
     }
+
+//    @PostMapping("{user_id}/validate")
+//    public User validateUser(@PathVariable("user_id") long userId, @RequestBody(required = true) User _user) {
+//        return null;
+//    }
+
 }
