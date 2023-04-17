@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/watchlist")
 @CrossOrigin
@@ -16,12 +18,24 @@ public class WatchListController {
 
     // Add to Watchlist
     @PostMapping("add")
-    public ResponseEntity<Watchlist> addWatchList(@RequestBody(required = true) Watchlist _wl) {
-        try {
-            Watchlist wl = watchlistService.addWatchlist(_wl);
-            return new ResponseEntity<>(wl, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
+    public void addToWatchlist(@RequestBody Watchlist watchlist) {
+        watchlistService.addToWatchlist(watchlist);
     }
+    
+    // Get Watchlist
+    @GetMapping("{user_id}")
+    public List<Watchlist> getWatchlistByUserId(@PathVariable("user_id") long userId) {
+        return watchlistService.getWatchlistByUserId(userId);
+    }
+
+
+    // Remove an anime from watchlist
+    @DeleteMapping("{user_id}/{anime_id}")
+    public void deleteAnimeFromWatchlist(@PathVariable("user_id") long userId, @PathVariable("anime_id") long animeId) {
+        Watchlist watchlist = new Watchlist();
+        watchlist.setUserId(userId);
+        watchlist.setAnimeId(animeId);
+        watchlistService.deleteAnimeFromWatchlist(watchlist);
+    }
+
 }
