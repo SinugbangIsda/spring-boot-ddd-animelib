@@ -22,7 +22,7 @@ public class Anime {
     private String title;
 
     @TableField("alt_title")
-    private String alt_title;
+    private String altTitle;
 
     @TableField("type")
     private String type;
@@ -40,5 +40,5 @@ public class Anime {
     private String synopsis;
 
     @TableField("image_uri")
-    private String image_uri;
+    private String imageURI;
 }
