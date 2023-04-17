@@ -26,7 +26,7 @@ public class AnimeServiceImpl implements AnimeService {
 
     @Override
     public Anime getAnimeById(long animeId) {
-        return null;
+        return animeMapper.selectById(animeId);
     }
 
     @Override
