@@ -1,13 +1,42 @@
 package com.sunognaisda.animelib.impl.domain.service;
 
+import com.sunognaisda.animelib.domain.mapper.AnimeMapper;
 import com.sunognaisda.animelib.domain.model.Anime;
 import com.sunognaisda.animelib.domain.service.AnimeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AnimeServiceImpl implements AnimeService {
+
+    @Autowired
+    private AnimeMapper animeMapper;
+
     @Override
-    public Anime addAnime(Anime anime) {
+    public void addAnime(Anime anime) {
+        animeMapper.insert(anime);
+    }
+
+    @Override
+    public List<Anime> getAllAnime() {
+        return animeMapper.selectList(null);
+    }
+
+    @Override
+    public Anime getAnimeById(long animeId) {
         return null;
     }
+
+    @Override
+    public void updateAnimeById(Anime anime) {
+        animeMapper.updateById(anime);
+    }
+
+    @Override
+    public void deleteAnimeById(long animeId) {
+        animeMapper.deleteById(animeId);
+    }
+
 }
