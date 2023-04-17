@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Object getUserById(long user_id) {
-       return userMapper.selectById(user_id);
+    public User loginUser(long userId) {
+       return userMapper.selectById(userId);
     }
 }
