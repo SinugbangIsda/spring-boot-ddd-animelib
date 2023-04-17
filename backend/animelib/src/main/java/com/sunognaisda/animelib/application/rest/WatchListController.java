@@ -14,6 +14,7 @@ public class WatchListController {
     @Autowired
     private WatchlistService watchlistService;
 
+    // Add to Watchlist
     @PostMapping("add")
     public ResponseEntity<Watchlist> addWatchList(@RequestBody(required = true) Watchlist _wl) {
         try {
