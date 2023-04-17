@@ -21,13 +21,12 @@ public class WatchListController {
     public void addToWatchlist(@RequestBody Watchlist watchlist) {
         watchlistService.addToWatchlist(watchlist);
     }
-    
+
     // Get Watchlist
     @GetMapping("{user_id}")
     public List<Watchlist> getWatchlistByUserId(@PathVariable("user_id") long userId) {
         return watchlistService.getWatchlistByUserId(userId);
     }
-
 
     // Remove an anime from watchlist
     @DeleteMapping("{user_id}/{anime_id}")
