@@ -37,7 +37,7 @@ const Dashboard = () => {
           />
         </div>
         <div className = "flex flex-row justify-start items-center space-x-10">
-          { DUMMY_DATA.map((anime: AnimeList) => (
+          { DUMMY_DATA.map((anime: Anime) => (
             <Link 
               key = { anime.animeId }
               to = { `/anime/${anime.animeId}` }

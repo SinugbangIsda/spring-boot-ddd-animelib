@@ -1,11 +1,11 @@
 import React from 'react';
-import { AnimeList } from '../../interfaces';
+import { Anime } from '../../interfaces';
 
 const AnimeCard = ({ 
     animeId, 
     title, 
     coverImageUri 
-  }: AnimeList) => {
+  }: Anime ) => {
   return (
     <div className = "flex flex-col items-center space-y-2">
       <img 
