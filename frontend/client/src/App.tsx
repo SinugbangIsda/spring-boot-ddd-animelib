@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PrivateRoute from "./components/privateroute";
 import { GlobalProvider } from "./context/global";
 import lazyLoad from './utils/lazyLoad';
@@ -13,69 +13,57 @@ const NewForm = lazyLoad(() => import('./pages/newform'));
 const ForgotPassword = lazyLoad(() => import('./pages/forgotpassword'));
 const SelectedAnime = lazyLoad(() => import('./pages/anime'));
 
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: 
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>,
+  },
+  {
+    path: '/signin',
+    element: <Signin/>,
+  },
+  {
+    path: '/signup',
+    element: <Signup/>,
+  },
+  {
+    path: '/forgotpassword',
+    element: <ForgotPassword />,
+  },
+  {
+    path: '/anime/:animeId',
+    element:
+      <PrivateRoute>
+        <SelectedAnime />
+      </PrivateRoute>,
+  },
+  {
+    path: '/watchlist',
+    element:
+      <PrivateRoute>
+        <Watchlist />
+      </PrivateRoute>,
+  },
+  {
+    path: '/newform',
+    element:
+      <PrivateRoute>
+        <NewForm />
+      </PrivateRoute>,
+  },
+  {
+    path: '*',
+    element: <Error404/>,
+  },
+]);
+
 const App = () => {
   return (
     <GlobalProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path = "/"
-            element = {
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
-          <Route 
-            path = "/signin" 
-            element = { 
-              <Signin/> 
-            } 
-          />
-          <Route 
-            path = "/signup" 
-            element = {
-              <Signup/>
-            }
-          />
-          <Route
-            path = "/forgotpassword"
-            element = {
-              <ForgotPassword />
-            }
-          />
-          <Route
-            path = "/anime/:animeId"
-            element = {
-              <PrivateRoute>
-                <SelectedAnime />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path = "/watchlist"
-            element = {
-              <PrivateRoute>
-                <Watchlist />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path = "/newform"
-            element = {
-              <PrivateRoute>
-                <NewForm />
-              </PrivateRoute>
-            }
-          />
-          <Route 
-            path = '*' 
-            element = { 
-              <Error404/> 
-            } 
-          />
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router = { router } />      
     </GlobalProvider>
   )
 }
