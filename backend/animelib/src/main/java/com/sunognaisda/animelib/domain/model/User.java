@@ -25,6 +25,9 @@ public class User {
     @TableField("first_name")
     private String firstName;
 
+    @TableField("emailAddress")
+    private String emailAddress;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 }
