@@ -1,7 +1,9 @@
 package com.sunognaisda.animelib.application.rest;
 
 import com.sunognaisda.animelib.domain.model.Anime;
+import com.sunognaisda.animelib.domain.model.Watchlist;
 import com.sunognaisda.animelib.domain.service.AnimeService;
+import com.sunognaisda.animelib.domain.service.WatchlistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
