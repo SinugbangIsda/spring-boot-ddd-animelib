@@ -8,6 +8,7 @@ import com.sunognaisda.animelib.application.rest.service.JwtService;
 import com.sunognaisda.animelib.domain.mapper.UserMapper;
 import com.sunognaisda.animelib.domain.model.User;
 import com.sunognaisda.animelib.domain.service.UserService;
+import com.sunognaisda.animelib.infra.util.Sha512HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -42,6 +43,15 @@ public class AuthController {
             Optional<User> queriedUser = Optional.ofNullable(userMapper.selectOne(queryWrapper));
             if (!queriedUser.isPresent()) {
                 throw new Exception("User not found");
+            }
+
+            // Check credentials
+            String password = userLoginRequest.getPassword();
+            String dbHashedPassword = queriedUser.get().getPassword();
+            boolean verifyPassword = Sha512HashUtil.verifyPassword(password, dbHashedPassword);
+
+            if (!verifyPassword) {
+                throw new Exception("Incorrect Password");
             }
 
             // Generate JWT
