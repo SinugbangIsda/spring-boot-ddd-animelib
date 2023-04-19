@@ -34,8 +34,8 @@ public class AuthController {
         userService.registerUser(user);
     }
 
-    @GetMapping("login")
-    public ResponseEntity<UserLoginResponse> loginUser (@RequestBody UserLoginRequest userLoginRequest) {
+    @PostMapping("login")
+    public ResponseEntity<UserResponse> loginUser (@RequestBody UserLoginRequest userLoginRequest) {
         try {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("emailAddress", userLoginRequest.getEmailAddress());
