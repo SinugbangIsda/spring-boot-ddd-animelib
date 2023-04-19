@@ -56,14 +56,12 @@ public class AuthController {
 
             // Generate JWT
             String token = jwtService.generateToken(queriedUser.get());
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("X-Access-Token", token);
-            return ResponseEntity.ok().headers(headers)
-                    .body(new UserResponse(queriedUser.get(), null));
+            return ResponseEntity.ok()
+                    .body(new UserResponse(queriedUser.get(), token,null));
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new UserResponse(null, new ErrorContent("Login Error", e.getMessage())));
+                    .body(new UserResponse(null, null, new ErrorContent("Login Error", e.getMessage())));
         }
     }
 
