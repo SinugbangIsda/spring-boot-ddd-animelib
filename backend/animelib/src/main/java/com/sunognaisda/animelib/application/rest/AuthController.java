@@ -38,7 +38,7 @@ public class AuthController {
     public ResponseEntity<UserResponse> loginUser (@RequestBody UserLoginRequest userLoginRequest) {
         try {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("emailAddress", userLoginRequest.getEmailAddress());
+            queryWrapper.eq("email_address", userLoginRequest.getEmailAddress());
             Optional<User> queriedUser = Optional.ofNullable(userMapper.selectOne(queryWrapper));
             if (!queriedUser.isPresent()) {
                 throw new Exception("User not found");
