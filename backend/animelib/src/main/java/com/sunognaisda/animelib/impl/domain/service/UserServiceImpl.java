@@ -7,7 +7,6 @@ import com.sunognaisda.animelib.infra.util.Sha512HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
