@@ -3,7 +3,7 @@ package com.sunognaisda.animelib.application.rest;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sunognaisda.animelib.application.dto.ErrorContent;
 import com.sunognaisda.animelib.application.dto.user.UserLoginRequest;
-import com.sunognaisda.animelib.application.dto.user.UserLoginResponse;
+import com.sunognaisda.animelib.application.dto.user.UserResponse;
 import com.sunognaisda.animelib.application.rest.service.JwtService;
 import com.sunognaisda.animelib.domain.mapper.UserMapper;
 import com.sunognaisda.animelib.domain.model.User;
@@ -49,11 +49,11 @@ public class AuthController {
             HttpHeaders headers = new HttpHeaders();
             headers.set("X-Access-Token", token);
             return ResponseEntity.ok().headers(headers)
-                    .body(new UserLoginResponse(queriedUser.get(), null));
+                    .body(new UserResponse(queriedUser.get(), null));
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new UserLoginResponse(null, new ErrorContent("Login Error", e.getMessage())));
+                    .body(new UserResponse(null, new ErrorContent("Login Error", e.getMessage())));
         }
     }
 
