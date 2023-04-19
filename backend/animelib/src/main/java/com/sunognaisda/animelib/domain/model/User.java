@@ -28,6 +28,9 @@ public class User {
     @TableField("email_address")
     private String emailAddress;
 
+    @TableField("image_uri")
+    private  String imageURI;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 }
