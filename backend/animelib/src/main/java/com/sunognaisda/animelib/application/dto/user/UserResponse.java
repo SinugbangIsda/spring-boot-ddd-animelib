@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserResponse {
     private User user;
+    private String token;
     private ErrorContent errorContent;
 }
