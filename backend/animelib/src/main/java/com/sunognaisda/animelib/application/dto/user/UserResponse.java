@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserLoginResponse {
+public class UserResponse {
     private User user;
     private ErrorContent errorContent;
 }
