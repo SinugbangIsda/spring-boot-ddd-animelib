@@ -1,5 +1,9 @@
 package com.sunognaisda.animelib.application.rest;
 
+import com.sunognaisda.animelib.application.dto.ErrorContent;
+import com.sunognaisda.animelib.application.dto.anime.AnimeCreateRequest;
+import com.sunognaisda.animelib.application.dto.anime.AnimeResponse;
+import com.sunognaisda.animelib.domain.mapper.AnimeMapper;
 import com.sunognaisda.animelib.domain.model.Anime;
 import com.sunognaisda.animelib.domain.model.Watchlist;
 import com.sunognaisda.animelib.domain.service.AnimeService;
@@ -10,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/anime")
