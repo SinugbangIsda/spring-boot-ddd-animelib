@@ -1,5 +1,6 @@
 package com.sunognaisda.animelib.application.rest;
 
+import com.sunognaisda.animelib.domain.model.Anime;
 import com.sunognaisda.animelib.domain.model.Watchlist;
 import com.sunognaisda.animelib.domain.service.WatchlistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class WatchListController {
 
     // Get Watchlist
     @GetMapping("{user_id}")
-    public List<Watchlist> getWatchlistByUserId(@PathVariable("user_id") long userId) {
+    public List<Anime> getWatchlistByUserId(@PathVariable("user_id") long userId) {
         return watchlistService.getWatchlistByUserId(userId);
     }
 
@@ -36,5 +37,4 @@ public class WatchListController {
         watchlist.setAnimeId(animeId);
         watchlistService.deleteAnimeFromWatchlist(watchlist);
     }
-
 }
