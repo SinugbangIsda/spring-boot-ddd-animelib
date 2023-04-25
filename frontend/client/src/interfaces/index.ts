@@ -1,3 +1,6 @@
+import { BoxProps, FlexProps } from "@chakra-ui/react";
+import { IconType } from "react-icons";
+
 export interface AppLayoutProps {
     children: JSX.Element | JSX.Element[];
 };
@@ -46,4 +49,24 @@ export interface Watchlist {
 
 export interface SearchAnimeQuery {
     query: string;
-}
+};
+
+export interface MobileProps extends FlexProps {
+    onOpen: () => void;
+};
+
+export interface SidebarProps extends BoxProps {
+    onClose: () => void;
+};
+
+export interface NavItemProps extends FlexProps {
+    icon: IconType;
+    children: JSX.Element | JSX.Element[] | string;
+    to: string;
+};
+
+export interface LinkItemProps {
+    name: string;
+    icon: IconType;
+    to: string;
+};
