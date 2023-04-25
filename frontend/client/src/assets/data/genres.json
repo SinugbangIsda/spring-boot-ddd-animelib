@@ -1,0 +1,50 @@
+[
+    {
+        "value": "Action"
+    },
+    {
+        "value": "Adventure"
+    },
+    {
+        "value": "Comedy"
+    },
+    {
+        "value": "Drama"
+    },
+    {
+        "value": "Fantasy"
+    },
+    {
+        "value": "Horror"
+    },
+    {
+        "value": "Mystery"
+    },
+    {
+        "value": "Psychological"
+    },
+    {
+        "value": "Romance"
+    },
+    {
+        "value": "Sci-Fi"
+    },
+    {
+        "value": "Slice of Life"
+    },
+    {
+        "value": "Supernatural"
+    },
+    {
+        "value": "Shounen"
+    },
+    {
+        "value": "Shoujo"
+    },
+    {
+        "value": "Seinen"
+    },
+    {
+        "value": "School"
+    }
+]
