@@ -1,5 +1,5 @@
 import React from 'react';
-import { Anime } from '../../interfaces';
+import { Anime } from '../../../interfaces';
 import { Flex, Image, Text } from '@chakra-ui/react';
 
 const AnimeCard = ({ 
