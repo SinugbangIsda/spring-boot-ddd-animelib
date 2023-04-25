@@ -43,7 +43,6 @@ import {
   useToast
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
-import { useDispatch } from 'react-redux';
 import { getUserAndToken } from '../../redux/slices/authSlice';
 
 const INITIAL_FORM_STATE_SEARCH: SearchAnimeQuery = {
@@ -447,6 +446,18 @@ const Dashboard = () => {
                   border = "1px"
                   borderColor = "#383a40"
                   resize = "none"
+                  css = {{
+                    '&::-webkit-scrollbar': {
+                      width: '4px',
+                    },
+                    '&::-webkit-scrollbar-track': {
+                      width: '6px',
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                      background: 'white',
+                      borderRadius: '24px',
+                    },
+                  }}
                   isRequired
                   value = { drawerFormState.synopsis }
                   onChange = {(e) => setDrawerFormState({
