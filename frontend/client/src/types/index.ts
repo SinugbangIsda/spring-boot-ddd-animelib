@@ -1,6 +1,12 @@
-export type Actions = 
-    | { type: "SET_ERROR", payload: string }
-    | { type: "SET_DATA", payload:  string }
-    | { type: "LOGIN_SUCCESS", payload: any }
-    | { type: "LOGIN_FAILED", payload: string }
-    | { type: "LOGOUT" }
+import { PayloadAction } from "@reduxjs/toolkit";
+import { User } from "../interfaces";
+import { store } from "../redux/store";
+
+export type AuthState = {
+    user: User | null;
+    token: string | null;
+};
+
+export type AuthActions = PayloadAction<AuthState>;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
