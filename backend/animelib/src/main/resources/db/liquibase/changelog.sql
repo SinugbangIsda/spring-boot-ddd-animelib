@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS user
     first_name VARCHAR(30),
     email_address VARCHAR(50),
     password VARCHAR(255),
-    image_uri TEXT
+    image_uri TEXT,
+    role VARCHAR(10)
 );
 
 CREATE TABLE IF NOT EXISTS anime
