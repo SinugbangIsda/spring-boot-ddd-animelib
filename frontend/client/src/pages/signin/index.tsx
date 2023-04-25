@@ -1,164 +1,271 @@
 import React, { 
-  useContext,
   useState
 } from 'react';
-import { FcGoogle } from "react-icons/all";
 import { 
   Link, 
-  Navigate 
+  useNavigate
 } from "react-router-dom";
-import { GlobalContext } from '../../context/global';
+import { useSigninMutation } from '../../redux/services/authServices';
+import { SigninUser } from '../../interfaces';
+import { 
+  Center, 
+  Container, 
+  Text,
+  Box,
+  Flex,
+  Stack,
+  Heading,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Button,
+  Checkbox,
+  Divider,
+  useToast
+} from "@chakra-ui/react";
 
-const INITIAL_FORM_STATE = {
-  email: "",
+const INITIAL_FORM_STATE: SigninUser = {
+  emailAddress: "",
   password: "",
 }
 
 const Signin = () => {
-  const [ formState, setFormState ] = useState(INITIAL_FORM_STATE);
-  const { data, dispatch } = useContext(GlobalContext);
-  const { userId } = data;
+  const [ formState, setFormState ] = useState<SigninUser>(INITIAL_FORM_STATE);
+  const [ signin ] = useSigninMutation();
+  const [ showPassword, setShowPassword ] = useState<Boolean>(false);
+  const navigate = useNavigate();
+  const toast = useToast();
+
+  const showToast = (title: string, status: "error"| "info" | "success"| "loading") => {
+    toast({
+      title: title,
+      status: status,
+      duration: 3000,
+      isClosable: true
+    });
+  };
 
   const handleSigninWithGoogle = () => {
-    console.log("Signin with Google");
-    dispatch({
-      type: "LOGIN_SUCCESS",
-      payload: {
-        userId: "1234567890"
-      }
-    });
+
   }
 
-  const handleSigninWithEmail = () => {
-    console.log("Signin with Email");
-    console.log(formState);
-  }
+  const handleSigninWithEmail = async () => {
+    try {
+      const userData = await signin(formState).unwrap();
+      const token = userData.token;
+      const user = userData.user;
+      if (token && user) {
+        localStorage.setItem("token", JSON.stringify(token));
+        localStorage.setItem("user", JSON.stringify(user));
+        showToast("Successful login", "success");
+        navigate("/");
+        setFormState(INITIAL_FORM_STATE);
+      }
+    } catch(err: any) {
+      if (!err.originalStatus) {
+        showToast("Incorrect credentials", "error");
+      } else if (err.originalStatus === 400) {
+        showToast("Missing Email or Password", "error");
+      } else if (err.originalStatus === 401) {
+        showToast("Unauthorized", "error");
+      } else {
+        showToast("Login failed", "error");
+      }
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSigninWithEmail();
   }
 
-  if (userId === null) {
-    return (
-      <section className = "min-h-screen bg-[#141517]">
-        <div className ="flex flex-col items-center justify-center px-6 py-8 mx-auto space-y-8">
-          <p className = "text-white font-bold text-4xl select-none text-center">
-            Anime<span className = "text-[#E6613E]">Lib</span>
-          </p>
-          <div className ="w-full bg-[#1A1B1E] rounded-lg border-2 border-[#383a40] md:mt-0 sm:max-w-md xl:p-0">
-            <div className ="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <p className = "text-xl font-bold leading-tight tracking-tight text-center text-white select-none">
-                Sign in to your account
-              </p>
-              <form 
-                className = "space-y-4 md:space-y-6" 
-                onSubmit = {(e) => {
-                  handleSubmit(e);
-                }}
-              >
-                <div>
-                  <label 
-                    htmlFor = "email" 
-                    className = "block mb-2 text-sm font-medium text-white select-none"
-                  >
+  return (
+    <Flex
+      minH = "100vh"
+      align = "center"
+      justify = "center"
+      bg = "#141517"
+    >
+      <Container maxW = "lg">
+        <Stack 
+          spacing = { 4 } 
+          mx = {'auto'} 
+        >
+          <Stack align = {'center'}>
+            <Flex
+              as = "b"
+              fontSize = "3xl"
+              css = {{
+                "WebkitUserSelect": "none",
+                "msUserSelect": "none",
+                "userSelectg": "none",
+              }}
+            >
+              <Text color = "white">
+                Anime
+              </Text>
+              <Text color = "#E6613E">
+                Lib
+              </Text>
+            </Flex>
+          </Stack>
+          <Box
+            rounded = "lg"
+            bg = "#1A1B1E"
+            boxShadow = "lg"
+            border = "1px"
+            borderColor = "#383a40"
+            p = { 8 }
+          >
+            <form onSubmit = {(e) => handleSubmit(e)}>
+              <Stack spacing = { 4 }>
+                <Text 
+                  fontSize = "2xl" 
+                  color = "white" 
+                  align = "center"
+                  as = "b"
+                >
+                  Sign in to your account
+                </Text>
+                <FormControl 
+                  id = "emailAddress" 
+                  color = "white"
+                  isRequired
+                >
+                  <FormLabel>
                     Email Address
-                  </label>
-                  <input 
-                    type = "email" 
-                    name = "email" 
-                    id = "email" 
-                    className = "block w-full p-2.5 bg-[#25262B] border-2 border-[#383a40] placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 rounded-lg" 
-                    placeholder = "name@company.com" 
-                    value = { formState.email }
+                  </FormLabel>
+                  <Input 
+                    autoComplete = "off"
+                    type = "email"
+                    placeholder = "name@company.com"
+                    bg = "#25262B"
+                    border = "1px"
+                    borderColor = "#383a40"
+                    value = { formState.emailAddress }
                     onChange = {(e) => setFormState({
                       ...formState,
-                      email: e.target.value
+                      emailAddress: e.target.value
                     })}
-                    required
                   />
-                </div>
-                <div>
-                  <label 
-                    htmlFor = "password" 
-                    className = "block mb-2 text-sm font-medium text-white select-none"
-                  >
+                </FormControl>
+                <FormControl 
+                  id = "password" 
+                  color = "white"
+                  isRequired
+                >
+                  <FormLabel>
                     Password
-                  </label>
-                  <input 
-                    type = "password" 
-                    name = "password" 
-                    id = "password" 
-                    placeholder = "••••••••" 
-                    value = { formState.password }
-                    className = "block w-full p-2.5 bg-[#25262B] border-2 border-[#383a40] placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 rounded-lg"
-                    required
-                    onChange = {(e) => setFormState({
-                      ...formState,
-                      password: e.target.value
-                    })}
-                  />
-                </div>
-                <div className = "flex items-center justify-between">
-                  <div className = "flex items-start">
-                    <div className = "flex items-center h-5">
-                      <input 
-                        id = "remember" 
-                        name = "remember"
-                        type = "checkbox" 
-                        className = "w-4 h-4 accent-[#E6613E]" 
-                      />
-                    </div>
-                    <div className = "ml-2 text-sm">
-                      <label 
-                        htmlFor = "remember" 
-                        className = "text-gray-300 select-none"
-                      >
-                        Remember me
-                      </label>
-                    </div>
-                  </div>
-                  <p className = "text-sm font-medium text-primary-600 hover:underline text-white select-none">
-                    <Link to = "/forgotpassword">
+                  </FormLabel>
+                  <InputGroup>
+                    <Input
+                      autoComplete = "off"
+                      pr = "4.5rem"
+                      type = { showPassword ? 'text' : 'password'}
+                      placeholder = "********"
+                      bg = "#25262B"
+                      border = "1px"
+                      borderColor = "#383a40"
+                      value = { formState.password }
+                      onChange = {(e) => setFormState({
+                        ...formState,
+                        password: e.target.value
+                      })}
+                    />
+                    <InputRightElement width = "4.5rem">
+                      <Button 
+                        h = "1.75rem" 
+                        size = "sm" 
+                        bg = "#25262B"
+                        border = "1px"
+                        borderColor = "#383a40"
+                        _hover = {{
+                          bg: "#2F3035"
+                        }}
+                        onClick = {() => 
+                            setShowPassword((showPassword) => !showPassword)
+                          }
+                        >
+                          { showPassword ? 'Hide' : 'Show'}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
+                </FormControl>
+              </Stack>
+              <Stack 
+                spacing = { 10 }
+                py = { 4 }
+              >
+                <Stack
+                  direction = {{ base: 'column', sm: 'row' }}
+                  align = {'start'}
+                  justify = {'space-between'}
+                  color = "white"
+                  css = {{
+                    "WebkitUserSelect": "none",
+                    "msUserSelect": "none",
+                    "userSelectg": "none",
+                  }}
+                >
+                  <Checkbox>
+                    Remember me
+                  </Checkbox>
+                  <Link to = {'/forgotpassword'}>
+                    <Text color = "blue.200">
                       Forgot password?
+                    </Text>
+                  </Link>
+                </Stack>
+              </Stack>
+              <Button
+                w = "full"
+                bg = "#E6613E"
+                color = "white"
+                _hover = {{
+                  bg: "#d44f2e"
+                }}
+                type = "submit"
+              >
+                Sign in
+              </Button>
+              <Stack 
+                spacing = { 3 }
+                py = { 2 }
+              >
+                <Center>
+                  <Flex
+                    css = {{
+                      "WebkitUserSelect": "none",
+                      "msUserSelect": "none",
+                      "userSelectg": "none",
+                    }}
+                    color = "gray.300"
+                  >
+                    <Text
+                      mr = { 1 }
+                    >
+                      Don't have an account?
+                    </Text>
+                    <Link to = {'/signup'}>
+                      <Text
+                        _hover = {{ 
+                          color: "#E6613E"
+                        }}
+                      >
+                        Sign up
+                      </Text>
                     </Link>
-                  </p>
-                </div>
-                <div className = "space-y-4">
-                  <button 
-                    className = "w-full text-white bg-[#E6613E] hover:bg-[#d44f2e] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 select-none"
-                    type = "submit"
-                  >
-                    Sign in
-                  </button>
-                  <div className ="flex items-center justify-center select-none">
-                    <hr className ="w-full border-gray-300 dark:border-gray-600" />
-                    <p className ="mx-3 text-sm font-medium text-gray-500 dark:text-gray-400">or</p>
-                    <hr className ="w-full border-gray-300 dark:border-gray-600" />
-                  </div>
-                  <button 
-                    className = "w-full flex flex-row justify-center items-center space-x-4 rounded-lg bg-white p-2.5 hover:bg-[#f5f1f1] select-none"
-                    type = "button"
-                    onClick = { handleSigninWithGoogle }
-                  >
-                    <FcGoogle className = "w-6 h-6 text-[#E6613E]"/>
-                    <p className = "text-black font-medium text-md">
-                      Sign in with Google
-                    </p>
-                  </button>
-                  <p className ="text-sm font-light text-gray-400 select-none">
-                    Don't have an account yet? <Link to = "/signup"><span className ="font-medium hover:underline text-primary-500">Sign up</span></Link>
-                  </p>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-    )
-  } else {
-    return <Navigate to = "/"/>
-  }
-}
+                  </Flex>
+                </Center>
+              </Stack>
+            </form>
+          </Box>
+        </Stack>
+      </Container>
+    </Flex>
+  )
+} 
 
 export default Signin;

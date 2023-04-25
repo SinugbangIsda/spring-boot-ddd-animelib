@@ -1,22 +1,36 @@
 import React from 'react';
 import { Anime } from '../../interfaces';
+import { Flex, Image, Text } from '@chakra-ui/react';
 
 const AnimeCard = ({ 
-    animeId, 
+    id, 
     title, 
-    coverImageUri 
+    imageURI
   }: Anime ) => {
   return (
-    <div className = "flex flex-col items-center space-y-2">
-      <img 
-        src = { coverImageUri }
+    <Flex
+      direction = "column"
+      align = "center"
+      justify = "center"
+    >
+      <Image 
+        src = { imageURI }
         alt = { title }
-        className = "w-[250px] h-[300px] aspect-square"
+        objectFit = "fill"
+        w = "11rem"
+        h = "15rem"
       />
-      <p className = "text-white font-medium">
-        { title }
-      </p>
-    </div>
+      <Text
+        color = "white"
+        fontSize = "md"
+        as = "b"
+        textAlign = "center"
+        w = "11rem"
+        my = { 1 }
+      >
+        { title } 
+      </Text>
+    </Flex>
   )
 }
 

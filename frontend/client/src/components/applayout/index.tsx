@@ -1,148 +1,329 @@
-import React, { 
-  useContext, 
-  useState 
-} from 'react';
-import { AppLayoutProps } from '../../interfaces';
-import { Link } from 'react-router-dom';
-import { GlobalContext } from '../../context/global';
-import { 
-  IoBookmark, 
-  MdMovieFilter 
-} from "react-icons/all";
+import React, { ReactNode } from 'react';
 import {
-  AppShell,
-  Navbar,
-  Header,
-  Footer,
-  Aside,
+  IconButton,
+  Avatar,
+  Box,
+  CloseButton,
+  Flex,
+  HStack,
+  VStack,
+  Icon,
+  Drawer,
+  DrawerContent,
   Text,
-  MediaQuery,
-  Burger,
-} from '@mantine/core';
+  useDisclosure,
+  BoxProps,
+  FlexProps,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  useToast
+} from '@chakra-ui/react';
+import {
+  FiHome,
+  FiMenu,
+  FiChevronDown,
+  FiBookmark
+} from 'react-icons/fi';
+import { IconType } from 'react-icons';
+import { ReactText } from 'react';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getUserAndToken, logout } from '../../redux/slices/authSlice';
+import { User } from '../../interfaces';
 
-const NavItems = [
-  {
-    name: "Anime List",
-    path: "/",
-    icon: 
-      <MdMovieFilter
-        aria-hidden = "true"
-        className = "flex-shrink-0 w-6 h-6 transition duration-75 group-hover:text-white"
-      />
+interface LinkItemProps {
+  name: string;
+  icon: IconType;
+  to: string;
+}
+const LinkItems: Array<LinkItemProps> = [
+  { 
+    name: 'Dashboard', 
+    icon: FiHome,
+    to: '/'
   },
-  {
-    name: "Watchlist",
-    path: "/watchlist",
-    icon: 
-      <IoBookmark 
-        aria-hidden = "true" 
-        className = "flex-shrink-0 w-6 h-6  transition duration-75  group-hover:text-white" 
-      /> 
-  }
+  { 
+    name: 'Watchlist', 
+    icon: FiBookmark,
+    to: '/watchlist'
+  },
+
 ];
 
-const AppLayout = ({ children }: AppLayoutProps) => {
-  const [ userDropDown, setUserDropDown ] = useState(false);
-  const [ navbarOpen, setNavBarOpen ] = useState<boolean>(true);
-  const { data, dispatch } = useContext(GlobalContext);
+const AppLayout = ({ children }: { children: ReactNode }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  return (
+    <Box 
+      minH = "100vh" 
+      bg = "#1a1b1e"
+    >
+      <SidebarContent
+        onClose = {() => onClose }
+        display = {{ base: 'none', md: 'block' }}
+      />
+      <Drawer
+        autoFocus = { false }
+        isOpen = { isOpen }
+        placement = "left"
+        onClose = { onClose }
+        returnFocusOnClose = { false }
+        onOverlayClick = { onClose }
+        size = "full"
+      >
+        <DrawerContent>
+          <SidebarContent onClose = { onClose } />
+        </DrawerContent>
+      </Drawer>
+      {/* mobilenav */}
+      <MobileNav onOpen = { onOpen } />
+      <Box ml = {{ base: 0, md: 60 }} >
+        { children }
+      </Box>
+    </Box>
+  );
+}
 
-  const handleLogout = () => {
-    dispatch({
-      type: "LOGOUT"
-    })
-  }
+interface SidebarProps extends BoxProps {
+  onClose: () => void;
+}
+
+const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  return (
+    <Box
+      transition = "3s ease"
+      bg = "#141517"
+      borderRight = "1px"
+      borderRightColor = "#1A1B1E"
+      w = {{ base: 'full', md: 60 }}
+      pos = "fixed"
+      h = "full"
+      {...rest}>
+      <Flex 
+        h = "20" 
+        alignItems = "center" 
+        mx = "8" 
+        justifyContent = "space-between"
+      >
+        <Flex
+          fontSize = "2xl"
+          as = "b"
+          css = {{
+            "WebkitUserSelect": "none",
+            "msUserSelect": "none",
+            "userSelectg": "none",
+          }}
+        >
+          <Text color = "white">
+            Anime
+          </Text>
+          <Text color = "#E6613E">
+            Lib
+          </Text>
+        </Flex>
+      <CloseButton 
+        display = {{ base: 'flex', md: 'none' }} 
+        onClick = { onClose }
+        color = "white" 
+      />
+      </Flex>
+      { LinkItems.map((link) => (
+        <NavItem 
+          key = { link.name } 
+          icon = { link.icon }
+          to = { link.to }
+        >
+          { link.name }
+        </NavItem>
+      ))}
+    </Box>
+  );
+};
+
+interface NavItemProps extends FlexProps {
+  icon: IconType;
+  children: ReactText;
+  to: string;
+} 
+const NavItem = ({ icon, children, to, ...rest }: NavItemProps) => {
+  return (
+    <Link to = { to }>
+      <Flex
+        align = "center"
+        p = "4"
+        mx = "4"
+        borderRadius = "lg"
+        role = "group"
+        cursor = "pointer"
+        _hover = {{
+          bg: "#25262b"
+        }}
+        color = "white"
+        {...rest}
+      >
+        {icon && (
+          <Icon
+            mr = "4"
+            fontSize = "16"
+            _groupHover = {{
+              color: 'white',
+            }}
+            as = { icon }
+          />
+        )}
+        { children }
+        <Outlet />
+      </Flex>
+    </Link>
+  );
+};
+
+interface MobileProps extends FlexProps {
+  onOpen: () => void;
+}
+const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const toast = useToast();
+  const { user } = getUserAndToken();
+  const userData: User = JSON.parse((user) as string);
+
+  const showToast = (title: string, status: "error"| "info" | "success"| "loading") => {
+    toast({
+      title: title,
+      status: status,
+      duration: 3000,
+      isClosable: true
+    });
+  };
 
   return (
-    <AppShell
-      styles = {{
-        body: {
-          backgroundColor: '#1a1b1e',
-        }
-      }}
-      navbarOffsetBreakpoint = "sm"
-      asideOffsetBreakpoint = "sm"
-      header = {
-        <Header 
-          className = "bg-[#1A1B1E] border-0 select-none shadow-2xl"
-          height = {{ 
-            base: 50, 
-            md: 70 
-          }} 
-          p = "md"
-        >
-          <div
-            className = "flex flex-row justify-between items-center h-full"
-          >
-            <div className = "flex flex-row items-center space-x-2">
-              <MediaQuery 
-                largerThan = "sm" 
-                styles = {{ display: 'none' }}
-              >
-                <Burger
-                  opened = { navbarOpen }
-                  onClick = {() => setNavBarOpen((o) => !o)}
-                  size = "sm"
+    <Flex
+      ml = {{ base: 0, md: 60 }}
+      px = {{ base: 4, md: 4 }}
+      height = "16"
+      alignItems = "center"
+      bg = "#1A1B1E"
+      borderBottomWidth = "1px"
+      borderBottomColor = "#383a40"
+      justifyContent = {{ base: 'space-between', md: 'flex-end' }}
+      {...rest}>
+      <IconButton
+        display = {{ base: 'flex', md: 'none' }}
+        onClick = { onOpen }
+        variant = "outline"
+        aria-label = "open menu"
+        color = "white"
+        _hover = {{
+          bg: "transparent",
+        }}
+        icon = { <FiMenu /> }
+      />
+      <Flex
+        display = {{ base: 'flex', md: 'none'}}
+        as = "b"
+        fontSize = "2xl"
+        css = {{
+          "WebkitUserSelect": "none",
+          "msUserSelect": "none",
+          "userSelectg": "none",
+        }}
+      >
+        <Text color = "white">
+          Anime
+        </Text>
+        <Text color = "#E6613E">
+          Lib
+        </Text>
+      </Flex>
+      <HStack spacing = {{ base: '0', md: '6' }}>
+        <Flex alignItems = {'center'}>
+          <Menu>
+            <MenuButton
+              py = { 2 }
+              transition = "all 0.3s"
+              _focus = {{ boxShadow: 'none' }}>
+              <HStack>
+                <Avatar
+                  size = {'sm'}
+                  src = {
+                    'https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                  }
+                />
+                <VStack
+                  display = {{ base: 'none', md: 'flex' }}
+                  alignItems = "flex-start"
+                  spacing = "1px"
+                  ml = "2"
                   color = "white"
-                  mr = "xl"
-                />
-              </MediaQuery>
-              <p className = "text-white font-bold text-2xl text-center">
-                Anime<span className = "text-[#E6613E]">Lib</span>
-              </p>
-            </div>
-            <div className = "relative">
-              <button
-                type = "button"
-                className = "flex items-center justify-center w-8 h-8 text-gray-500 transition duration-150 ease-in-out rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                onClick = {() => setUserDropDown(!userDropDown)}
-              >
-                <img 
-                  src = "https://i.kym-cdn.com/entries/icons/original/000/021/155/Fish_wearing_a_chicken_smoking_a_cigarette_cover.jpg"
-                  alt = "User Avatar"
-                  className = "rounded-full"
-                />
-              </button>
-              <div className = {`absolute right-0 w-48 py-1 mt-2 origin-top-right bg-[#25262B] rounded-md shadow-lg outline-none ${userDropDown ? "block" : "hidden"}`}>
-                <button
-                  className = "w-full text-start px-4 py-2 text-sm transition duration-150 ease-in-out rounded-md text-gray-400 hover:bg-[#35373f]"
-                  onClick = { handleLogout }
                 >
-                  Sign out
-                </button>
-              </div>
-            </div>
-          </div>
-        </Header>
-      }
-      navbar = {
-        <Navbar 
-          p = "md" 
-          hiddenBreakpoint = "sm" 
-          hidden = { !navbarOpen } 
-          width = {{ 
-            sm: 200, 
-            lg: 250 
-          }}
-          className = "bg-[#141517] border-[#1A1B1E]"
-        >
-          { NavItems.map((item, index: number) => (
-            <Link
-              key = { index }
-              to = { `${item.path}` }
-              className = "flex flex-row justify-center items-center p-2 rounded-lg text-white hover:bg-[#25262b] space-x-4 text-md select-none"
+                  <Text fontSize = "sm">
+                    { userData.firstName + ' ' + userData.lastName }
+                  </Text>
+                  <Text 
+                    fontSize = "xs"
+                    textTransform = "capitalize"
+                  >
+                    { userData.role }
+                  </Text>
+                </VStack>
+                <Box display = {{ base: 'none', md: 'flex' }}>
+                  <FiChevronDown />
+                </Box>
+              </HStack>
+            </MenuButton>
+            <MenuList
+              bg = "#1A1B1E"
+              border = "1px"
+              borderColor = "#383a40"
+              color = "white"
             >
-              { item.icon }
-              <p>
-                { item.name }
-              </p>
-            </Link>
-          ))}
-        </Navbar>
-      }
-    >
-      { children }
-    </AppShell>
-  )
-}
+              <Link to = "/profile">
+                <MenuItem 
+                  bg = "transparent"
+                  _hover = {{
+                    bg: "#25262b"
+                  }}
+                >
+                  Profile
+                </MenuItem>
+              </Link>
+              <Link to = "/settings">
+                <MenuItem
+                  bg = "transparent"
+                  _hover = {{
+                    bg: "#25262b"
+                  }}
+                >
+                  Settings
+                </MenuItem>
+              </Link>
+              <MenuDivider />
+              <MenuItem
+                bg = "transparent"
+                _hover = {{
+                  bg: "#25262b"
+                }}
+                onClick = { () => {
+                  try {
+                    dispatch(logout());
+                    navigate('/signin');
+                    showToast("Logout successfully", "success");
+                  } catch (error) {
+                    showToast("Logout failed", "error");
+                  }
+                }}
+              >
+                Sign out
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Flex>
+      </HStack>
+    </Flex>
+  );
+};
 
 export default AppLayout;
