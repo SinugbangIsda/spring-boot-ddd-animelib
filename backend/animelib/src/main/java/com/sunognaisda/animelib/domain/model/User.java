@@ -29,7 +29,10 @@ public class User {
     private String emailAddress;
 
     @TableField("image_uri")
-    private  String imageURI;
+    private String imageURI;
+
+    @TableField("role")
+    private String role;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
