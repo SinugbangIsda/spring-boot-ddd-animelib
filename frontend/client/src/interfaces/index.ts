@@ -1,51 +1,49 @@
 export interface AppLayoutProps {
     children: JSX.Element | JSX.Element[];
-}
-
-export interface GlobalContextProps {
-    data: User;
-    error: string | null;
-    dispatch: any;
-}
-
-export interface GlobalProviderProps {
-    children: JSX.Element | JSX.Element[];
-}
+};
 
 export interface User {
-    userId: string | null;
-    refreshToken: string | null;
+    id: number | null;
     emailAddress: string | null;
-    fullname: string | null;
-    profileImageUri: string | null;
+    firstName: string | null;
+    lastName: string | null;
+    imageURI: string | null;
+    role: string | null;
+};
+
+export interface SignupUser {
+    firstName: string;
+    lastName: string;
+    emailAddress: string;
+    password: string;
+};
+
+export interface SigninUser {
+    emailAddress: string;
+    password: string;
+};
+
+export interface UserForgotPassword {
+    emailAddress: string;
 }
 
 export interface Anime {
-    animeId: string;
-    title: string;
+    id?: number | null;
+    title?: string;
     altTitle?: string;
-    animeType: string;
+    type?: string;
     episodes?: number;
     genre?: string;
     status?: string;
     synopsis?: string;
-    coverImageUri?: string;
-}
+    imageURI?: string;
+};
 
-export interface TextInputProps {
-    label: string;
-    type: string;
-    withAsterisk?: boolean;
-    error: string | null;
-    disabled?: boolean;
-    icon?: JSX.Element | JSX.Element[] | null;
-    iconWidth?: string | number | null;
-    inputWrapperOrder?: "input" | "label" | "error" | "description";
-    radius?: number | "xs" | "sm" | "md" | "lg" | "xl";
-    required?: boolean;
-    rightSection?: JSX.Element | JSX.Element[] | null;
-    size: "xs" | "sm" | "md" | "lg" | "xl";
-    variant: "unstyled" | "default" | "filled"
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+export interface Watchlist {
+    animeId?: number | null;
+    userId: number | null;
+};
+
+export interface SearchAnimeQuery {
+    query: string;
 }
