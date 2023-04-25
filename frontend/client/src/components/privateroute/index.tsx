@@ -1,32 +1,32 @@
+import React from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getUserAndToken, logout } from "../../redux/slices/authSlice";
+import jwtDecode from  "jwt-decode";
 
- 
+const PrivateRoute = () => {
+  const { user, token } = getUserAndToken();
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
-import { GlobalContext } from "../../context/global";
-// import jwt_decode from "jwt-decode";
-// import { getJwt } from "../../utils";
+  const isValidToken = (): boolean => {
+    if (!token && !user) return false;
+    const expiry = (jwtDecode(token!) as any)?.exp;
+    if (expiry * 1000 < Date.now()) {
+      dispatch(logout());
+      return false;
+    }
+    return true;
+  };
 
-const PrivateRoute = ({ children }: any) => {
-    const { data, dispatch } = useContext(GlobalContext);
-    const { userId } = data
-
-    const auth = () => {
-        if (userId === null) return false;
-        if (userId !== null) {
-        //   const { token } = JSON.parse(localStorage.getItem("user"));
-        //   const expiresIn = jwt_decode(token).exp * 1000;
-        //   const currentDate = new Date();
-        //   if (expiresIn < currentDate.getTime()) {
-        //     dispatch({ type: "LOGOUT" });
-        //     return false;
-        //   }
-        }
-        return true;
-    };
-
-    return auth() ? children : <Navigate to = "/signin" />
-}
+  return (
+    user && token && isValidToken() ? (
+      <Outlet />
+    ) : (
+      <Navigate to = "/signin" state = {{ from: location }} replace/>
+    )
+  )
+};
 
 
 
