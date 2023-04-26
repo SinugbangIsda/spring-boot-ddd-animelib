@@ -111,7 +111,10 @@ const Dashboard = () => {
               </Button>
             )}
           </Flex>
-          <SimpleGrid columns = {{ sm: 2, md: 3, lg: 4, xl: 5 }}> 
+          <SimpleGrid 
+            columns = {{ base: 1, sm: 3, md: 3, lg: 4, xl: 5 }}
+            spacing = {{ sm: 2, md: 4 }}
+          >
             { filteredAnime.map((anime: Anime) => (
               <Link
                 key = { anime.id }

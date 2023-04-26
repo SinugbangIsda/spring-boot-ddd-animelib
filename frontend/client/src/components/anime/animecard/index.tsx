@@ -8,10 +8,9 @@ const AnimeCard = ({
     imageURI
   }: Anime ) => {
   return (
-    <Flex
+    <Flex 
       direction = "column"
-      align = "center"
-      justify = "center"
+      align = {{ base: "center", md: "flex-start" }}
     >
       <Image 
         src = { imageURI }
