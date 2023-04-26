@@ -9,7 +9,7 @@ import {
   Anime, 
   User 
 } from '../../interfaces';
-import { useCreateWatchlistMutation } from '../../redux/services/watchlistService';
+import { useCreateWatchlistMutation, useGetAllWatchlistByUserIdQuery } from '../../redux/services/watchlistService';
 import { useGetAnimeByIdQuery } from '../../redux/services/animeService';
 import { getUserAndToken } from '../../redux/slices/authSlice';
 import { 
@@ -112,7 +112,11 @@ const SelectedAnime = () => {
               </Flex>
             </Link>
           </Flex>
-          <Flex direction = {{ base: 'column', sm: 'row' }}>
+          <Flex 
+            direction = {{ base: 'column', sm: 'row' }}
+            align = {{ base: "center", md: "flex-start" }}
+            textAlign = {{ base: "center", sm: "left" }}
+          >
             <Image
               src = { data?.imageURI }
               alt = { data?.title }
@@ -151,7 +155,7 @@ const SelectedAnime = () => {
               </Text>
             </Flex>
           </Flex>
-          <Flex>
+          <Flex w = "11em">
             <Button
               bg = "#E6613E"
               color = "white"
@@ -160,6 +164,7 @@ const SelectedAnime = () => {
               _hover = {{
                 bg: "#d44f2e"
               }}
+              fontSize = "sm"
               onClick = { handleAddToWatchlist }
             >
               Add to Watchlist
