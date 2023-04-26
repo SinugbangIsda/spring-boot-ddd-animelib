@@ -166,7 +166,7 @@ const Dashboard = () => {
         isOpen = { isOpen }
         onClose = { onClose }
         data = { drawerFormState }
-        header = "Edit Anime"
+        header = "Add Anime"
         refetch = { refetch }
       />
     </>

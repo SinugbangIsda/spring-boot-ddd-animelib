@@ -105,6 +105,7 @@ const AnimeMutationDrawer = ({
         e.preventDefault();
        switch (header) {
             case "Add Anime":
+                handleAddAnime();
                 break;
             case "Edit Anime":
                 handleUpdateAnime();
@@ -360,7 +361,7 @@ const AnimeMutationDrawer = ({
                             mr = { 3 }
                             type = "submit"
                         >
-                            Update
+                            { header === "Add Anime" ? "Add" : "Update"}
                         </Button>
                         <Button 
                             bg = "white"
