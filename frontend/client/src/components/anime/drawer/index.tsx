@@ -95,6 +95,8 @@ const AnimeMutationDrawer = ({
           await addAnime(formValues).unwrap();
           showToast("Anime added to watchlist", "success");
           refetch();
+          onClose();
+          setFormValues(INITIAL_FORM_STATE);
         } catch(err: any) {
           if (!err.originalStatus) {
             showToast("Network Error", "error");
