@@ -17,9 +17,6 @@ public class WatchlistServiceImpl implements WatchlistService {
     @Autowired
     private WatchlistMapper watchlistMapper;
 
-    @Autowired
-    private AnimeMapper animeMapper;
-
     @Override
     public void addToWatchlist(Watchlist watchlist) {
         watchlistMapper.insert(watchlist);
@@ -27,21 +24,7 @@ public class WatchlistServiceImpl implements WatchlistService {
 
     @Override
     public List<Anime> getWatchlistByUserId(long userId) {
-        // get all watchlist entries
-        QueryWrapper<Watchlist> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id", userId);
-        List<Watchlist> watchlists = watchlistMapper.selectList(queryWrapper);
-
-        // store all animeIds into a single list
-        List<Long> animeIdList = new ArrayList<>();
-        for (Watchlist watchlist : watchlists) {
-            animeIdList.add(watchlist.getAnimeId());
-        }
-
-        // query to get all anime information using the list of animeIds
-        QueryWrapper<Anime> animeQueryWrapper = new QueryWrapper<>();
-        animeQueryWrapper.in("id", animeIdList);
-        return animeMapper.selectList(animeQueryWrapper);
+        return watchlistMapper.getAllAnimeInWatchlist(userId);
     }
 
     @Override
