@@ -13,6 +13,8 @@ const Watchlist = lazyLoad(() => import('./pages/watchlist'));
 const Error404 = lazyLoad(() => import('./pages/error404'));
 const ForgotPassword = lazyLoad(() => import('./pages/forgotpassword'));
 const SelectedAnime = lazyLoad(() => import('./pages/anime'));
+const Profile = lazyLoad(() => import('./pages/profile'));
+
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "anime/:animeId",
         element: <SelectedAnime />
+      },
+      {
+        path: "profile",
+        element: <Profile />
       }
     ]
   },
