@@ -1,4 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { 
+    useEffect, 
+    useRef, 
+    useState 
+} from 'react';
 import { 
     Button, 
     Drawer, 
@@ -19,14 +23,19 @@ import {
     Select, 
     Stack, 
     Textarea, 
-    useDisclosure, 
     useToast
 } from "@chakra-ui/react";
 import genres from "../../../assets/data/genres.json";
 import types from "../../../assets/data/types.json";
 import statuses from "../../../assets/data/statuses.json";
-import { Anime, AnimeMutationDrawerProps } from '../../../interfaces';
-import { useCreateAnimeMutation, useUpdateAnimeMutation } from '../../../redux/services/animeService';
+import { 
+    Anime, 
+    AnimeMutationDrawerProps 
+} from '../../../interfaces';
+import { 
+    useCreateAnimeMutation, 
+    useUpdateAnimeMutation 
+} from '../../../redux/services/animeService';
 
 const INITIAL_FORM_STATE: Anime = {
     title: "",
