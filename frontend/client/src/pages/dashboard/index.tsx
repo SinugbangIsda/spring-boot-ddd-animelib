@@ -1,7 +1,6 @@
 import React, { 
   useState,
   useEffect,
-  useRef
 } from 'react';
 import AppLayout from '../../components/applayout';
 import { Link } from 'react-router-dom';
@@ -11,10 +10,7 @@ import {
   SearchAnimeQuery, 
   User
 } from '../../interfaces';
-import { 
-  useGetAllAnimeQuery,
-  useCreateAnimeMutation
-} from '../../redux/services/animeService';
+import { useGetAllAnimeQuery } from '../../redux/services/animeService';
 import { 
   Button, 
   Flex, 
@@ -24,23 +20,7 @@ import {
   InputRightElement, 
   SimpleGrid, 
   Stack,
-  Drawer,
-  DrawerOverlay,
-  DrawerHeader,
-  DrawerCloseButton,
-  DrawerBody,
-  DrawerFooter,
   useDisclosure,
-  DrawerContent,
-  FormLabel,
-  NumberInput,
-  NumberInputField,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInputStepper,
-  Select,
-  Textarea,
-  useToast
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { getUserAndToken } from '../../redux/slices/authSlice';
@@ -70,7 +50,6 @@ const Dashboard = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = getUserAndToken();
   const userData: User = JSON.parse(user as string);
-  const toast = useToast();
 
   useEffect(() => {
     if (data) {
@@ -81,15 +60,6 @@ const Dashboard = () => {
   useEffect(() => {
     refetch();
   }, [ refetch ]);
-
-  const showToast = (title: string, status: "error"| "info" | "success"| "loading") => {
-    toast({
-      title: title,
-      status: status,
-      duration: 3000,
-      isClosable: true
-    });
-  };
 
   return (
     <>
