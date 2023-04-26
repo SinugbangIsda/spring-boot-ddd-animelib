@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 import AppLayout from '../../components/applayout';
 import { Link } from 'react-router-dom';
-import AnimeCard from '../../components/animecard';
+import AnimeCard from '../../components/anime/animecard';
 import { 
   Anime, 
   SearchAnimeQuery, 
