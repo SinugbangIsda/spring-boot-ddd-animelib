@@ -11,7 +11,7 @@ const lazyLoad = (importFunc: () => Promise<any>) => {
                 justify = "center"
                 bg = "#141517"
             >
-                <CubeSpinner size = { 50 } frontColor = "#E6613E" backColor = "#b95238" loading />
+                <CubeSpinner size = { 42 } frontColor = "#E6613E" backColor = "#b95238" loading />
             </Flex>
         )
     };
