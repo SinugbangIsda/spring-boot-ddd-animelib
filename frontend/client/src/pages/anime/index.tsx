@@ -10,7 +10,10 @@ import {
   User 
 } from '../../interfaces';
 import { useCreateWatchlistMutation } from '../../redux/services/watchlistService';
-import { useGetAnimeByIdQuery } from '../../redux/services/animeService';
+import { 
+  useGetAnimeByIdQuery, 
+  useCheckIfUserAlreadyAddedAnimeToWatchlistByAnimeIdQuery 
+} from '../../redux/services/animeService';
 import { getUserAndToken } from '../../redux/slices/authSlice';
 import { 
   Button, 
@@ -51,7 +54,8 @@ const SelectedAnime = () => {
   const id = parseInt(animeId?.valueOf() as string);
   const { user } = getUserAndToken();
   const userData: User = JSON.parse(user as string);
-  const { data, isLoading, isError, refetch } = useGetAnimeByIdQuery({ animeId: id });
+  const animeData = useGetAnimeByIdQuery({ animeId: id });
+  const checkIfAnimeAdded = useCheckIfUserAlreadyAddedAnimeToWatchlistByAnimeIdQuery({ userId: userData.id, animeId: id });
   const [ addToWatchlist ] = useCreateWatchlistMutation();
   const [ drawerFormState, setDrawerFormState ] = useState<Anime>(INITIAL_FORM_STATE_DRAWER);
   const drawer = useDisclosure();
@@ -68,10 +72,10 @@ const SelectedAnime = () => {
   };
 
   useEffect(() => {
-    if (data) {
-      setDrawerFormState(data);
+    if (animeData.data) {
+      setDrawerFormState(animeData.data);
     }
-  }, [data]);
+  }, [animeData.data]);
 
   const handleAddToWatchlist = async () => {
     try { 
@@ -118,8 +122,8 @@ const SelectedAnime = () => {
             textAlign = {{ base: "center", sm: "left" }}
           >
             <Image
-              src = { data?.imageURI }
-              alt = { data?.title }
+              src = { animeData.data?.imageURI }
+              alt = { animeData.data?.title }
               w = "11em"
               h = "15em"
               objectFit = "cover"
@@ -133,25 +137,25 @@ const SelectedAnime = () => {
                 fontSize = "3xl"
                 as = "b"
               >
-                { data?.title }
+                { animeData.data?.title }
               </Text>
               <Text
                 fontSize = "lg"
                 as = "i"
               >
-                { data?.altTitle }
+                { animeData.data?.altTitle }
               </Text>
               <Text>
-                Type: { data?.type }
+                Type: { animeData.data?.type }
               </Text>
               <Text>
-                Genre: { data?.genre }
+                Genre: { animeData.data?.genre }
               </Text>
               <Text>
-                Status: { data?.status }
+                Status: { animeData.data?.status }
               </Text>
               <Text>
-                Episodes: { data?.episodes }
+                Episodes: { animeData.data?.episodes }
               </Text>
             </Flex>
           </Flex>
@@ -217,7 +221,7 @@ const SelectedAnime = () => {
           </Text>
           <Divider />
           <Text>
-            { data?.synopsis }
+            { animeData.data?.synopsis }
           </Text>
         </Stack>
       </AppLayout>
@@ -226,14 +230,14 @@ const SelectedAnime = () => {
         onClose = { drawer.onClose }
         data = { drawerFormState }
         header = "Edit Anime"
-        refetch = { refetch }
+        refetch = { animeData.refetch }
       />
       <AnimeMutationModal
         isOpen = { modal.isOpen }
         onClose = { modal.onClose }
         header = "Delete Anime"
         animeId = { id }
-        refetch = { refetch }
+        refetch = { animeData.refetch }
       />
     </>
   )
