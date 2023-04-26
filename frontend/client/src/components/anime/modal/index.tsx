@@ -19,7 +19,8 @@ import { AnimeMutationModalProps } from '../../../interfaces';
 const AnimeMutationModal = ({ 
     animeId,
     isOpen,
-    onClose
+    onClose,
+    refetch
 }: AnimeMutationModalProps) => {
     const initalFocusRef = useRef(null);
     const finalFocusRef = useRef(null);
@@ -38,20 +39,21 @@ const AnimeMutationModal = ({
 
     const handleDeleteAnime = async () => {
         try {
-          await deleteAnime({ animeId: animeId  }).unwrap();
-          showToast("Anime deleted", "success");
-          navigate("/")
-          onClose();
+            await deleteAnime({ animeId: animeId  }).unwrap();
+            showToast("Anime deleted", "success");
+            navigate("/")
+            onClose();
+            refetch!();
         } catch(err: any) {
-          if (!err.originalStatus) {
-            showToast("No Server Response", "error");
-          } else if (err.originalStatus === 400) {
-            showToast("Missing fields", "error");
-          } else if (err.originalStatus === 401) {
-            showToast("Unauthorized", "error");
-          } else {
-            showToast("Something went wrong", "error");
-          }
+            if (!err.originalStatus) {
+                showToast("No Server Response", "error");
+            } else if (err.originalStatus === 400) {
+                showToast("Missing fields", "error");
+            } else if (err.originalStatus === 401) {
+                showToast("Unauthorized", "error");
+            } else {
+                showToast("Something went wrong", "error");
+            }
         }
     };
 
@@ -76,7 +78,7 @@ const AnimeMutationModal = ({
                 color = "white"
             >
                 <ModalHeader>
-                    Create your account
+                    Delete Anime
                 </ModalHeader>
                 <ModalCloseButton />
                 <ModalBody pb = {6}>
