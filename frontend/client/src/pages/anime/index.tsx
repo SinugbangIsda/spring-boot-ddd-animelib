@@ -217,9 +217,7 @@ const SelectedAnime = () => {
               </Text>
             </Flex>
           </Flex>
-          <Stack
-            w = {{ base: "100%", md: "11em" }}
-          >
+          <Stack w = {{ base: "100%", md: "11em" }}>
             <Button
               bg = { checkIfAnimeAdded.data ?  "gray.400" : "#d44f2e"  }
               color = { checkIfAnimeAdded.data ? "gray.700" : "white" }
