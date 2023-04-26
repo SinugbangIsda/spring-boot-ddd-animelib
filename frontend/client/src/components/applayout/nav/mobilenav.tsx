@@ -5,12 +5,10 @@ import {
     HStack, 
     Menu, 
     MenuButton, 
-    VStack, 
     MenuList, 
     MenuItem, 
     MenuDivider, 
     Text, 
-    Box, 
     Avatar 
 } from "@chakra-ui/react";
 import { FiMenu, FiChevronDown } from "react-icons/fi";
@@ -80,16 +78,20 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <MenuButton
                 py = { 2 }
                 transition = "all 0.3s"
-                _focus = {{ boxShadow: 'none' }}>
-                <HStack>
+                _focus = {{ boxShadow: 'none' }}
+                >
                   <Avatar
                     size = {'sm'}
                     src = { userData.imageURI ? userData.imageURI : ""}
                     name = { userData.firstName + ' ' + userData.lastName }
                     bg = { userData.imageURI ? 'transparent' : '#E6613E'}
                     color = { userData.imageURI ? 'transparent' : 'white' }
+                    css = {{
+                      "WebkitUserSelect": "none",
+                      "msUserSelect": "none",
+                      "userSelectg": "none",
+                    }}
                   />
-                </HStack>
               </MenuButton>
               <MenuList
                 bg = "#1A1B1E"
