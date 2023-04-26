@@ -105,6 +105,7 @@ const Dashboard = () => {
                 _hover = {{
                   bg: "#d44f2e"
                 }}
+                fontSize = "sm"
                 onClick = { onOpen }
               >
                 Add Anime
@@ -112,7 +113,7 @@ const Dashboard = () => {
             )}
           </Flex>
           <SimpleGrid 
-            columns = {{ base: 1, sm: 3, md: 3, lg: 4, xl: 5 }}
+            columns = {{ base: 1, sm: 2, md: 3, lg: 4, xl: 5 }}
             spacing = {{ sm: 2, md: 4 }}
           >
             { filteredAnime.map((anime: Anime) => (
