@@ -1,13 +1,37 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { 
+  Link, 
+  useParams 
+} from "react-router-dom";
 import AppLayout from '../../components/applayout';
 import { IoIosArrowRoundBack } from "react-icons/all";
-import { Anime, User } from '../../interfaces';
+import { 
+  Anime, 
+  User 
+} from '../../interfaces';
 import { useCreateWatchlistMutation } from '../../redux/services/watchlistService';
-import { useDeleteAnimeMutation, useGetAnimeByIdQuery, useUpdateAnimeMutation } from '../../redux/services/animeService';
+import { useGetAnimeByIdQuery } from '../../redux/services/animeService';
 import { getUserAndToken } from '../../redux/slices/authSlice';
-import { Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, FormControl, FormLabel, IconButton, Image, Input, Menu, MenuButton, MenuItem, MenuList, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, Stack, Text, Textarea, useDisclosure, useToast } from '@chakra-ui/react';
-import { DeleteIcon, EditIcon, SettingsIcon } from '@chakra-ui/icons';
+import { 
+  Button, 
+  Divider, 
+  Flex, 
+  IconButton, 
+  Image, 
+  Menu, 
+  MenuButton, 
+  MenuItem, 
+  MenuList, 
+  Stack, 
+  Text, 
+  useDisclosure, 
+  useToast 
+} from '@chakra-ui/react';
+import { 
+  DeleteIcon, 
+  EditIcon, 
+  SettingsIcon 
+} from '@chakra-ui/icons';
 import AnimeMutationDrawer from '../../components/anime/drawer';
 import AnimeMutationModal from '../../components/anime/modal';
 
@@ -132,6 +156,7 @@ const SelectedAnime = () => {
               bg = "#E6613E"
               color = "white"
               w = "11em"
+              mr = { 2 }
               _hover = {{
                 bg: "#d44f2e"
               }}
