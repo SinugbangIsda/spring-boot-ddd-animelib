@@ -105,6 +105,8 @@ const Dashboard = () => {
             <FormControl 
               id = "search" 
               color = "white"
+              mr = {{ base: 0, sm: 4 }}
+              mb = {{ base: 4, sm: 0 }}
             >
               <InputGroup width = {{ base: "full", md: "xs"}}>
                 <Input 
