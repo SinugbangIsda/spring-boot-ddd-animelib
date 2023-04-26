@@ -16,8 +16,7 @@ import {
   InputGroup, 
   Input, 
   InputRightElement, 
-  Button, 
-  SimpleGrid 
+  SimpleGrid, 
 } from '@chakra-ui/react';
 import { useGetAllWatchlistByUserIdQuery } from '../../redux/services/watchlistService';
 import { getUserAndToken } from '../../redux/slices/authSlice';
@@ -77,7 +76,7 @@ const Watchlist = () => {
           </InputGroup>
         </FormControl>
         <SimpleGrid
-          columns = {{ base: 1, sm: 3, md: 3, lg: 4, xl: 5 }}
+          columns = {{ base: 1, sm: 2, md: 3, lg: 4, xl: 5 }}
           spacing = {{ sm: 2, md: 4 }}
         >
           { filteredAnime.map((anime: Anime) => (
