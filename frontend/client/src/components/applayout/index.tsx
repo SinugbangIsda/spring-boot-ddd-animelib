@@ -42,6 +42,4 @@ const AppLayout = ({ children }: AppLayoutProps ) => {
   );
 };
 
-
-
 export default AppLayout;
