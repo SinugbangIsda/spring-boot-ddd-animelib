@@ -297,7 +297,6 @@ const AnimeMutationDrawer = ({
                                         <option key = { value } value = { value }>
                                             { value }
                                         </option>
-
                                     ))}
                                 </Select>
                             </FormControl>
