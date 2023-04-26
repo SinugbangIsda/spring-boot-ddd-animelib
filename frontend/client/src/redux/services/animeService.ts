@@ -32,9 +32,9 @@ export const animeApi = createApi({
                 mode: "cors",
             })
         }),
-        checkIfUserAlreadyAddedAnimeToWatchlistByAnimeId: builder.query({
-            query: ({ animeId }) => ({
-                url: `/${animeId}`,
+        checkIfAnimeInWatchlist: builder.query({
+            query: ({ animeId, userId }) => ({
+                url: `/${animeId}/check/${userId}`,
                 method: "GET",
                 mode: "cors"
             })
@@ -74,7 +74,7 @@ export const animeApi = createApi({
 export const {
     useGetAllAnimeQuery,
     useGetAnimeByIdQuery,
-    useCheckIfUserAlreadyAddedAnimeToWatchlistByAnimeIdQuery,
+    useCheckIfAnimeInWatchlistQuery,
     useCreateAnimeMutation,
     useUpdateAnimeMutation,
     useDeleteAnimeMutation
