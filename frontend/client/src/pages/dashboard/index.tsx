@@ -78,6 +78,10 @@ const Dashboard = () => {
     }
   }, [ data ]);
 
+  useEffect(() => {
+    refetch();
+  }, [ refetch ]);
+
   const showToast = (title: string, status: "error"| "info" | "success"| "loading") => {
     toast({
       title: title,
