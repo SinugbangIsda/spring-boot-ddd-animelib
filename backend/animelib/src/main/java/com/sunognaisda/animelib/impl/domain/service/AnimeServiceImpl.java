@@ -35,6 +35,7 @@ public class AnimeServiceImpl implements AnimeService {
         return animeMapper.selectById(animeId);
     }
 
+
     @Override
     public void updateAnimeById(Anime anime) {
         animeMapper.updateById(anime);
@@ -46,6 +47,12 @@ public class AnimeServiceImpl implements AnimeService {
         queryWrapper.eq("anime_id", animeId);
         watchlistMapper.delete(queryWrapper);
         animeMapper.deleteById(animeId);
+    }
+
+    @Override
+    public boolean checkIfAnimeInWatchlist(Watchlist watchlist) {
+        return watchlist.equals(watchlistMapper.selectByMultiId(watchlist));
+
     }
 
 }

@@ -1,6 +1,7 @@
 package com.sunognaisda.animelib.domain.service;
 
 import com.sunognaisda.animelib.domain.model.Anime;
+import com.sunognaisda.animelib.domain.model.Watchlist;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface AnimeService {
     void updateAnimeById(Anime anime);
 
     void deleteAnimeById(long animeId);
+
+    boolean checkIfAnimeInWatchlist(Watchlist watchlist);
 }
