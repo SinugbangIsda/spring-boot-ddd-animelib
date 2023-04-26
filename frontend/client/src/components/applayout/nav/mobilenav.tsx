@@ -126,16 +126,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                     Profile
                   </MenuItem>
                 </Link>
-                <Link to = "/settings">
-                  <MenuItem
-                    bg = "transparent"
-                    _hover = {{
-                      bg: "#25262b"
-                    }}
-                  >
-                    Settings
-                  </MenuItem>
-                </Link>
                 <MenuDivider />
                 <MenuItem
                   bg = "transparent"
