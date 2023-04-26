@@ -1,4 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { 
+    createApi, 
+    fetchBaseQuery 
+} from "@reduxjs/toolkit/query/react";
 import { BASE_URLS } from "../../constants";
 import { getUserAndToken } from "../slices/authSlice";
 
@@ -48,7 +51,7 @@ export const animeApi = createApi({
             })
         }),
         updateAnime: builder.mutation({
-            query: ( body ) => ({
+            query: (body) => ({
                 url: `/${body.id}`,
                 method: "PUT",
                 body: JSON.stringify(body),
