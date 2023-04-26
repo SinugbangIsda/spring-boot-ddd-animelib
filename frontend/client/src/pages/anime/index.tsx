@@ -9,7 +9,7 @@ import {
   Anime, 
   User 
 } from '../../interfaces';
-import { useCreateWatchlistMutation, useGetAllWatchlistByUserIdQuery } from '../../redux/services/watchlistService';
+import { useCreateWatchlistMutation } from '../../redux/services/watchlistService';
 import { useGetAnimeByIdQuery } from '../../redux/services/animeService';
 import { getUserAndToken } from '../../redux/slices/authSlice';
 import { 
