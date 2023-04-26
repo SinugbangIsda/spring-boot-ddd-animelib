@@ -6,8 +6,8 @@ import { Anime, User } from '../../interfaces';
 import { useCreateWatchlistMutation } from '../../redux/services/watchlistService';
 import { useDeleteAnimeMutation, useGetAnimeByIdQuery, useUpdateAnimeMutation } from '../../redux/services/animeService';
 import { getUserAndToken } from '../../redux/slices/authSlice';
-import { Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, FormControl, FormLabel, IconButton, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, Stack, Text, Textarea, useDisclosure, useToast } from '@chakra-ui/react';
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
+import { Button, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, FormControl, FormLabel, IconButton, Image, Input, Menu, MenuButton, MenuItem, MenuList, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Select, Stack, Text, Textarea, useDisclosure, useToast } from '@chakra-ui/react';
+import { DeleteIcon, EditIcon, SettingsIcon } from '@chakra-ui/icons';
 import AnimeMutationDrawer from '../../components/anime/drawer';
 import AnimeMutationModal from '../../components/anime/modal';
 
@@ -140,21 +140,42 @@ const SelectedAnime = () => {
               Add to Watchlist
             </Button>
             { userData.role === "admin" && (
-              <>
-                <IconButton
-                  aria-label = "Edit Anime"
-                  color = "gray.500"
-                  icon = { <EditIcon />}
-                  mx = { 2 }
-                  onClick = { drawer.onOpen }
-                />
-                <IconButton
-                  aria-label = "Delete Anime"
-                  color = "gray.500"
-                  icon = { <DeleteIcon />}
-                  onClick = { modal.onOpen }
-                />
-              </>
+              <Menu>
+                <MenuButton 
+                  as = { IconButton } 
+                  color = "gray.600" 
+                  bg = "gray.300"
+                >
+                  <SettingsIcon />
+                </MenuButton>
+                <MenuList
+                  bg = "#1A1B1E"
+                  border = "1px"
+                  borderColor = "#383a40"
+                  color = "white"
+                >
+                  <MenuItem 
+                    bg = "transparent"
+                    icon = { <EditIcon /> } 
+                    onClick = { drawer.onOpen }
+                    _hover = {{
+                      bg: "#25262b"
+                    }}
+                  >
+                    Edit
+                  </MenuItem>
+                  <MenuItem
+                    bg = "transparent"
+                    icon = { <DeleteIcon /> } 
+                    onClick = { modal.onOpen }
+                    _hover = {{
+                      bg: "#25262b"
+                    }}
+                  >
+                    Delete
+                  </MenuItem>
+                </MenuList>
+              </Menu>
             )}
           </Flex>
           <Text
