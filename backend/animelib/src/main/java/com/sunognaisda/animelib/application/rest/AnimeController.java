@@ -1,9 +1,5 @@
 package com.sunognaisda.animelib.application.rest;
 
-import com.sunognaisda.animelib.application.dto.ErrorContent;
-import com.sunognaisda.animelib.application.dto.anime.AnimeCreateRequest;
-import com.sunognaisda.animelib.application.dto.anime.AnimeResponse;
-import com.sunognaisda.animelib.domain.mapper.AnimeMapper;
 import com.sunognaisda.animelib.domain.model.Anime;
 import com.sunognaisda.animelib.domain.model.Watchlist;
 import com.sunognaisda.animelib.domain.service.AnimeService;
@@ -36,6 +32,15 @@ public class AnimeController {
     @GetMapping("{anime_id}")
     public Anime getAnimeById(@PathVariable("anime_id") long animeId) {
         return animeService.getAnimeById(animeId);
+    }
+
+    // Check if anime exists in watchlist.
+    @GetMapping("{anime_id}/check/{user_id}")
+    public boolean checkIfAnimeInWatchlist(@PathVariable("anime_id") long animeId, @PathVariable("user_id") long userId) {
+        Watchlist watchlist = new Watchlist();
+        watchlist.setUserId(userId);
+        watchlist.setAnimeId(animeId);
+        return animeService.checkIfAnimeInWatchlist(watchlist);
     }
 
     @PutMapping("{anime_id}")
