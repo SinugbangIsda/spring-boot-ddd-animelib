@@ -88,12 +88,13 @@ const Dashboard = () => {
                   onChange = {(e) => setQuery(e.target.value)}
                 />
                 <InputRightElement>
-                  <Button
-                    variant = "ghost"
-                    _hover={{ bg: 'gray.700' }}
-                  >
-                    <SearchIcon />
-                  </Button>
+                  <SearchIcon 
+                    css = {{
+                      "WebkitUserSelect": "none",
+                      "msUserSelect": "none",
+                      "userSelectg": "none",
+                    }}
+                  />
                 </InputRightElement>
               </InputGroup>
             </FormControl>
