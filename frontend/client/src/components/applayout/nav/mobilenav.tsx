@@ -37,7 +37,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       <Flex
         ml = {{ base: 0, md: 60 }}
         px = {{ base: 4, md: 4 }}
-        height = "16"
+        height = "12"
         alignItems = "center"
         bg = "#1A1B1E"
         borderBottomWidth = "1px"
@@ -83,8 +83,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   <Avatar
                     size = {'sm'}
                     src = { userData.imageURI ? userData.imageURI : ""}
-                    name = { userData.firstName + ' ' + userData.lastName }
-                    bg = { userData.imageURI ? 'transparent' : '#E6613E'}
+                    name = { !userData.imageURI ? userData.firstName + ' ' + userData.lastName : ""}
+                    bg = { userData.imageURI ? 'transparent' : '#4f5e70'}
                     color = { userData.imageURI ? 'transparent' : 'white' }
                     css = {{
                       "WebkitUserSelect": "none",
