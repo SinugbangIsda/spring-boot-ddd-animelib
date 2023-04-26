@@ -9,10 +9,10 @@ import {
   Anime, 
   User 
 } from '../../interfaces';
-import { useCreateWatchlistMutation } from '../../redux/services/watchlistService';
+import { useCreateWatchlistMutation, useDeleteWatchlistMutation } from '../../redux/services/watchlistService';
 import { 
   useGetAnimeByIdQuery, 
-  useCheckIfUserAlreadyAddedAnimeToWatchlistByAnimeIdQuery 
+  useCheckIfAnimeInWatchlistQuery 
 } from '../../redux/services/animeService';
 import { getUserAndToken } from '../../redux/slices/authSlice';
 import { 
@@ -55,7 +55,8 @@ const SelectedAnime = () => {
   const { user } = getUserAndToken();
   const userData: User = JSON.parse(user as string);
   const animeData = useGetAnimeByIdQuery({ animeId: id });
-  const checkIfAnimeAdded = useCheckIfUserAlreadyAddedAnimeToWatchlistByAnimeIdQuery({ userId: userData.id, animeId: id });
+  const checkIfAnimeAdded = useCheckIfAnimeInWatchlistQuery({ userId: userData.id, animeId: id });
+  const [ removeFromWatchlist ] = useDeleteWatchlistMutation();
   const [ addToWatchlist ] = useCreateWatchlistMutation();
   const [ drawerFormState, setDrawerFormState ] = useState<Anime>(INITIAL_FORM_STATE_DRAWER);
   const drawer = useDisclosure();
@@ -80,12 +81,27 @@ const SelectedAnime = () => {
   const handleAddToWatchlist = async () => {
     try { 
       await addToWatchlist({ userId: userData.id, animeId: id });
-      showToast("Added to watchlist", "success");
+        showToast("Added to watchlist", "success");
+        checkIfAnimeAdded.refetch();
     } catch(err: any) {
       if (!err.originalStatus) {
         showToast("No Server Response", "error");
-      } else if (err.originalStatus === 400) {
-        showToast("Missing fields", "error");
+      } else if (err.originalStatus === 401) {
+        showToast("Unauthorized", "error");
+      } else {
+        showToast("Something went wrong", "error");
+      }
+    }
+  };
+  
+  const handleRemoveFromWatchlist = async () => {
+    try {
+      await removeFromWatchlist({ userId: userData.id, animeId: id });
+      showToast("Removed from watchlist", "success");
+      checkIfAnimeAdded.refetch();
+    } catch(err: any) {
+      if (!err.originalStatus) {
+        showToast("No Server Response", "error");
       } else if (err.originalStatus === 401) {
         showToast("Unauthorized", "error");
       } else {
@@ -102,7 +118,11 @@ const SelectedAnime = () => {
           p = { 4 }
           color = "white"
         >
-          <Flex color = "white">
+          <Flex 
+            color = "white"
+            align = "center"
+            justify = "space-between"
+          >
             <Link to = "/">
               <Flex
                 _hover = {{
@@ -115,6 +135,44 @@ const SelectedAnime = () => {
                 </Text>
               </Flex>
             </Link>
+            { userData.role === "admin" && (
+              <Menu>
+                <MenuButton 
+                  as = { IconButton } 
+                  color = "gray.600" 
+                  bg = "gray.300"
+                >
+                  <SettingsIcon />
+                </MenuButton>
+                <MenuList
+                  bg = "#1A1B1E"
+                  border = "1px"
+                  borderColor = "#383a40"
+                  color = "white"
+                >
+                  <MenuItem 
+                    bg = "transparent"
+                    icon = { <EditIcon /> } 
+                    onClick = { drawer.onOpen }
+                    _hover = {{
+                      bg: "#25262b"
+                    }}
+                  >
+                    Edit
+                  </MenuItem>
+                  <MenuItem
+                    bg = "transparent"
+                    icon = { <DeleteIcon /> } 
+                    onClick = { modal.onOpen }
+                    _hover = {{
+                      bg: "#25262b"
+                    }}
+                  >
+                    Delete
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            )}
           </Flex>
           <Flex 
             direction = {{ base: 'column', sm: 'row' }}
@@ -159,59 +217,22 @@ const SelectedAnime = () => {
               </Text>
             </Flex>
           </Flex>
-          <Flex w = "11em">
+          <Stack
+            w = {{ base: "100%", md: "11em" }}
+          >
             <Button
-              bg = "#E6613E"
-              color = "white"
-              w = "11em"
-              mr = { 2 }
+              bg = { checkIfAnimeAdded.data ?  "gray.400" : "#d44f2e"  }
+              color = { checkIfAnimeAdded.data ? "gray.700" : "white" }
               _hover = {{
-                bg: "#d44f2e"
+                bg: checkIfAnimeAdded.data ? "#25262b" : "#d44f2e"
               }}
               fontSize = "sm"
-              onClick = { handleAddToWatchlist }
+              onClick = { checkIfAnimeAdded.data ? handleRemoveFromWatchlist : handleAddToWatchlist }
+              mr = { 2 }
             >
-              Add to Watchlist
+              { checkIfAnimeAdded.data ? "Remove from" : "Add to" } watchlist
             </Button>
-            { userData.role === "admin" && (
-              <Menu>
-                <MenuButton 
-                  as = { IconButton } 
-                  color = "gray.600" 
-                  bg = "gray.300"
-                >
-                  <SettingsIcon />
-                </MenuButton>
-                <MenuList
-                  bg = "#1A1B1E"
-                  border = "1px"
-                  borderColor = "#383a40"
-                  color = "white"
-                >
-                  <MenuItem 
-                    bg = "transparent"
-                    icon = { <EditIcon /> } 
-                    onClick = { drawer.onOpen }
-                    _hover = {{
-                      bg: "#25262b"
-                    }}
-                  >
-                    Edit
-                  </MenuItem>
-                  <MenuItem
-                    bg = "transparent"
-                    icon = { <DeleteIcon /> } 
-                    onClick = { modal.onOpen }
-                    _hover = {{
-                      bg: "#25262b"
-                    }}
-                  >
-                    Delete
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            )}
-          </Flex>
+          </Stack>
           <Text
             fontSize = "2xl"
             as = "h1"
