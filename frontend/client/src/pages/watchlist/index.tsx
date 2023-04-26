@@ -6,8 +6,7 @@ import AppLayout from '../../components/applayout';
 import { Link } from 'react-router-dom';
 import AnimeCard from '../../components/anime/animecard';
 import { 
-  Anime, 
-  SearchAnimeQuery, 
+  Anime,
   User
 } from '../../interfaces';
 import { SearchIcon } from '@chakra-ui/icons';
@@ -23,13 +22,9 @@ import {
 import { useGetAllWatchlistByUserIdQuery } from '../../redux/services/watchlistService';
 import { getUserAndToken } from '../../redux/slices/authSlice';
 
-const INITIAL_FORM_STATE: SearchAnimeQuery = {
-  query: ""
-};
-
 const Watchlist = () => {
-  const [ formState, setFormState ] = useState<SearchAnimeQuery>(INITIAL_FORM_STATE);
   const [ anime, setAnime ] = useState<Anime[]>([]);
+  const [ query, setQuery ] = useState<string>("");
   const { user } = getUserAndToken();
   const userData: User = JSON.parse(user as string);
   const { data, isLoading, isError, refetch } = useGetAllWatchlistByUserIdQuery({
@@ -45,6 +40,10 @@ const Watchlist = () => {
   useEffect(() => {
     refetch();
   }, [ refetch ]);
+
+  const filteredAnime = anime.filter((anime: Anime) => {
+    return anime.title?.toLowerCase().includes(query.toLowerCase());
+  });
 
   return (
     <AppLayout>
@@ -63,19 +62,13 @@ const Watchlist = () => {
               bg = "#25262B"
               border = "1px"
               borderColor = "#383a40"
-              value = { formState.query }
-              onChange = {(e) => setFormState({
-                ...formState,
-                query: e.target.value
-              })}
+              value = { query }
+              onChange = {(e) => setQuery(e.target.value)}
             />
             <InputRightElement>
               <Button
                 variant = "ghost"
                 _hover={{ bg: 'gray.700' }}
-                onClick = {() =>
-                  console.log("Searching: " + formState.query)
-                }
               >
                 <SearchIcon />
               </Button>
@@ -86,7 +79,7 @@ const Watchlist = () => {
           columns = {{ sm: 2, md: 3, lg: 4, xl: 5 }} 
           spacing = { 4 }
         >
-          { anime.map((anime: Anime) => (
+          { filteredAnime.map((anime: Anime) => (
             <Link
               key = { anime.id }
               to = { `/anime/${anime.id}` }

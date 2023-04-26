@@ -1,12 +1,12 @@
 import React, { 
   useState,
-  useEffect,
+  useEffect
 } from 'react';
 import AppLayout from '../../components/applayout';
 import { Link } from 'react-router-dom';
 import AnimeCard from '../../components/anime/animecard';
 import { 
-  Anime, 
+  Anime,
   User
 } from '../../interfaces';
 import { useGetAllAnimeQuery } from '../../redux/services/animeService';
@@ -40,6 +40,7 @@ const INITIAL_FORM_STATE_DRAWER: Anime = {
 const Dashboard = () => {
   const [ drawerFormState, setDrawerFormState ] = useState<Anime>(INITIAL_FORM_STATE_DRAWER);
   const [ anime, setAnime ] = useState<Anime[]>([]);
+  const [ query, setQuery ] = useState<string>("");
   const { data, isLoading, isError, refetch } = useGetAllAnimeQuery({});
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = getUserAndToken();
@@ -54,6 +55,10 @@ const Dashboard = () => {
   useEffect(() => {
     refetch();
   }, [ refetch ]);
+
+  const filteredAnime = anime.filter((anime: Anime) => {
+    return anime.title?.toLowerCase().includes(query.toLowerCase());
+  });
 
   return (
     <>
@@ -79,6 +84,8 @@ const Dashboard = () => {
                   bg = "#25262B"
                   border = "1px"
                   borderColor = "#383a40"
+                  value = { query }
+                  onChange = {(e) => setQuery(e.target.value)}
                 />
                 <InputRightElement>
                   <Button
@@ -104,7 +111,7 @@ const Dashboard = () => {
             )}
           </Flex>
           <SimpleGrid columns = {{ sm: 2, md: 3, lg: 4, xl: 5 }}> 
-            { anime.map((anime: Anime) => (
+            { filteredAnime.map((anime: Anime) => (
               <Link
                 key = { anime.id }
                 to = { `/anime/${anime.id}` }
