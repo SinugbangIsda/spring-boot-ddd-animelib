@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import AnimeCard from '../../components/anime/animecard';
 import { 
   Anime, 
-  SearchAnimeQuery, 
   User
 } from '../../interfaces';
 import { useGetAllAnimeQuery } from '../../redux/services/animeService';
@@ -26,10 +25,6 @@ import { SearchIcon } from '@chakra-ui/icons';
 import { getUserAndToken } from '../../redux/slices/authSlice';
 import AnimeMutationDrawer from '../../components/anime/drawer';
 
-const INITIAL_FORM_STATE_SEARCH: SearchAnimeQuery = {
-  query: ""
-};
-
 const INITIAL_FORM_STATE_DRAWER: Anime = {
   id: null,
   title: "",
@@ -43,7 +38,6 @@ const INITIAL_FORM_STATE_DRAWER: Anime = {
 };
 
 const Dashboard = () => {
-  const [ searchFormState, setSearchFormState ] = useState<SearchAnimeQuery>(INITIAL_FORM_STATE_SEARCH);
   const [ drawerFormState, setDrawerFormState ] = useState<Anime>(INITIAL_FORM_STATE_DRAWER);
   const [ anime, setAnime ] = useState<Anime[]>([]);
   const { data, isLoading, isError, refetch } = useGetAllAnimeQuery({});
@@ -85,19 +79,11 @@ const Dashboard = () => {
                   bg = "#25262B"
                   border = "1px"
                   borderColor = "#383a40"
-                  value = { searchFormState.query }
-                  onChange = {(e) => setSearchFormState({
-                    ...searchFormState,
-                    query: e.target.value
-                  })}
                 />
                 <InputRightElement>
                   <Button
                     variant = "ghost"
                     _hover={{ bg: 'gray.700' }}
-                    onClick = {() =>
-                      console.log("Searching: " + searchFormState.query)
-                    }
                   >
                     <SearchIcon />
                   </Button>
