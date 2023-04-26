@@ -1,5 +1,6 @@
 import { BoxProps, FlexProps } from "@chakra-ui/react";
 import { IconType } from "react-icons";
+import { FormEvent, RefObject } from "react";
 
 export interface AppLayoutProps {
     children: JSX.Element | JSX.Element[];
@@ -69,4 +70,29 @@ export interface LinkItemProps {
     name: string;
     icon: IconType;
     to: string;
+};
+
+export interface SelectedAnimeProps {
+    refetch: () => void;
+    data: Anime;
+    isLoading: boolean;
+    isError: boolean;
+};
+
+export interface AnimeMutationDrawerProps {
+    animeId?: number | null;
+    header: string | JSX.Element | JSX.Element[] | null;
+    data: Anime;
+    refetch: () => void;
+    isOpen: boolean;
+    onClose: () => void;
+};
+
+export interface AnimeMutationModalProps {
+    data?: Anime;
+    animeId: number | null;
+    header: string | JSX.Element | JSX.Element[] | null;
+    refetch?: () => void;
+    isOpen: boolean;
+    onClose: () => void;
 };
