@@ -29,6 +29,13 @@ export const animeApi = createApi({
                 mode: "cors",
             })
         }),
+        checkIfUserAlreadyAddedAnimeByAnimeId: builder.query({
+            query: ({ animeId }) => ({
+                url: `/${animeId}`,
+                method: "GET",
+                mode: "cors"
+            })
+        }),
         createAnime: builder.mutation({
             query: (body) => ({
                 url: "/add",
@@ -64,6 +71,7 @@ export const animeApi = createApi({
 export const {
     useGetAllAnimeQuery,
     useGetAnimeByIdQuery,
+    useCheckIfUserAlreadyAddedAnimeByAnimeIdQuery,
     useCreateAnimeMutation,
     useUpdateAnimeMutation,
     useDeleteAnimeMutation
