@@ -25,7 +25,7 @@ const AnimeCard = ({
         as = "b"
         textAlign = "center"
         w = "11rem"
-        my = { 1 }
+        my = { 3 }
       >
         { title } 
       </Text>
