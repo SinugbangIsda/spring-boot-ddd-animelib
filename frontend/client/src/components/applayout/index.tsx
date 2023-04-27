@@ -15,6 +15,7 @@ const AppLayout = ({ children }: AppLayoutProps ) => {
     <Box 
       minH = "100vh" 
       bg = "#1a1b1e"
+      overflowY = "auto"
     >
       <Sidebar
         onClose = {() => onClose }
