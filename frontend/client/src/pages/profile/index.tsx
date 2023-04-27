@@ -3,6 +3,7 @@ import AppLayout from '../../components/applayout';
 import { 
   AbsoluteCenter,
   Avatar,
+  Box,
   Center,
   Flex,
   Stack,
@@ -16,7 +17,7 @@ import { User } from '../../interfaces';
 const Profile = () => {
   const { user } = getUserAndToken();
   const userData: User = JSON.parse((user) as string);
-  const { id, firstName, lastName, emailAddress, role, imageURI } = userData;
+  const { firstName, lastName, emailAddress, role, imageURI } = userData;
 
   return (
     <AppLayout>
@@ -33,46 +34,112 @@ const Profile = () => {
                 }}
               >
                 <IoIosArrowRoundBack size = "1.5em" />
-                <Text fontSize = "lg">
+                <Text fontSize = "md">
                   Back
                 </Text>
               </Flex>
             </Link>
           </Flex>
           <Stack
-            spacing = { 4 }
+            spacing = { 8 }
             color = "white"
             align = "center"
           >
-            <Center>
-              <Stack
-                alignItems = "center"
-                spacing = { 2 }
+            <Avatar
+              size = "2xl"
+              src = { userData.imageURI ? userData.imageURI : ""}
+              name = { !userData.imageURI ? userData.firstName + ' ' + userData.lastName : ""}
+              bg = { userData.imageURI ? 'transparent' : '#4f5e70'}
+              color = { userData.imageURI ? 'transparent' : 'white' }
+              css = {{
+                "WebkitUserSelect": "none",
+                "msUserSelect": "none",
+                "userSelectg": "none",
+              }}
+            />
+            <Stack 
+              spacing = { 1 }
+              align = "center"
+            >
+              <Text
+                fontSize = "3xl"
+                fontWeight = "bold"
               >
-                <Avatar
-                  size = "2xl"
-                  src = { imageURI ? imageURI : "" }
-                  name = { userData.firstName + ' ' + userData.lastName }
-                  bg = { userData.imageURI ? 'transparent' : '#4f5e70'}
-                  color = { userData.imageURI ? 'transparent' : 'white' }
-                />
-                <Text 
-                  fontSize = "4xl"
-                  fontWeight = "semibold"
+                Personal Info
+              </Text>
+              <Text>
+                Info about you and your account
+              </Text>
+            </Stack>
+            <Box
+              border = "1px"
+              borderColor = "#383a40"
+              p = { 4 }
+              rounded = "md"
+              w = "full"
+            >
+              <Stack
+                spacing = { 4 }
+                color = "white"
+              >
+                <Flex
+                  align = "center"
+                  justify = "space-between"
                 >
-                  { firstName } { lastName }
-                </Text>
-                <Text fontSize = "md">
-                  { emailAddress }
-                </Text>
-                <Text 
-                  fontSize = "md"
-                  textTransform = "capitalize"
+                  <Text
+                    fontSize = "md"
+                    fontWeight = "bold"
+                  >
+                    First Name
+                  </Text>
+                  <Text>
+                    { firstName }
+                  </Text>
+                </Flex>
+                <Flex
+                  align = "center"
+                  justify = "space-between"
                 >
-                  AnimeLib { role }
-                </Text>
+                  <Text
+                    fontSize = "md"
+                    fontWeight = "bold"
+                  >
+                    Last Name
+                  </Text>
+                  <Text>
+                    { lastName }
+                  </Text>
+                </Flex>
+                <Flex
+                  align = "center"
+                  justify = "space-between"
+                >
+                  <Text
+                    fontSize = "md"
+                    fontWeight = "bold"
+                  >
+                    Email
+                  </Text>
+                  <Text>
+                    { emailAddress }
+                  </Text>
+                </Flex>
+                <Flex
+                  align = "center"
+                  justify = "space-between"
+                >
+                  <Text
+                    fontSize = "md"
+                    fontWeight = "bold"
+                  >
+                    Role
+                  </Text>
+                  <Text textTransform = "capitalize">
+                    AnimeLib { role }
+                  </Text>
+                </Flex>
               </Stack>
-            </Center>
+            </Box>
           </Stack>
         </Stack>
       </AppLayout>
