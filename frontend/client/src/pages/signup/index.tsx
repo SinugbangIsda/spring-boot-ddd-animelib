@@ -43,10 +43,6 @@ const Signup = () => {
     });
   };
 
-  const handleSignupWithGoogle = () => {
-    console.log("Signup with Google");
-  }
-
   const handleSignupWithEmail = async () => {
     try {
       await signup({ ...formState, role: "user" }).unwrap();

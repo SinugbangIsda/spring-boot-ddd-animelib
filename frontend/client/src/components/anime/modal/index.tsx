@@ -8,7 +8,6 @@ import {
     ModalHeader, 
     ModalOverlay, 
     Text, 
-    useDisclosure, 
     useToast
 } from '@chakra-ui/react';
 import React, { useRef } from 'react';

@@ -1,17 +1,17 @@
 import { 
-    useToast, 
-    Flex, 
-    IconButton, 
-    HStack, 
-    Menu, 
-    MenuButton, 
-    MenuList, 
-    MenuItem, 
-    MenuDivider, 
-    Text, 
-    Avatar 
+  useToast, 
+  Flex, 
+  IconButton, 
+  HStack, 
+  Menu, 
+  MenuButton, 
+  MenuList, 
+  MenuItem, 
+  MenuDivider, 
+  Text, 
+  Avatar 
 } from "@chakra-ui/react";
-import { FiMenu, FiChevronDown } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { MobileProps, User } from "../../../interfaces";

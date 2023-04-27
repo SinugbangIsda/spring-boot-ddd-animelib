@@ -1,15 +1,13 @@
 import React from 'react';
 import AppLayout from '../../components/applayout';
 import { 
-  AbsoluteCenter,
   Avatar,
   Box,
-  Center,
   Flex,
   Stack,
   Text
 } from '@chakra-ui/react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { IoIosArrowRoundBack } from 'react-icons/io';
 import { getUserAndToken } from '../../redux/slices/authSlice';
 import { User } from '../../interfaces';

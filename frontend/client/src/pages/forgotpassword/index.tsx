@@ -1,26 +1,19 @@
 import React, {
   useState
 } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FcGoogle, IoIosArrowRoundBack } from "react-icons/all";
+import { useNavigate } from 'react-router-dom';
+import { IoIosArrowRoundBack } from "react-icons/all";
 import { 
   Box, 
   Button, 
-  Center, 
-  Checkbox, 
   Container, 
-  Divider, 
   Flex, 
   FormControl, 
   FormLabel, 
-  Heading, 
-  Input, 
-  InputGroup, 
-  InputRightElement, 
+  Input,
   Stack,
   Text
 } from '@chakra-ui/react';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { UserForgotPassword } from '../../interfaces';
 
 const INITIAL_FORM_STATE: UserForgotPassword = {

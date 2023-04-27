@@ -14,7 +14,6 @@ import {
   Box,
   Flex,
   Stack,
-  Heading,
   FormControl,
   FormLabel,
   Input,
@@ -22,7 +21,6 @@ import {
   InputRightElement,
   Button,
   Checkbox,
-  Divider,
   useToast
 } from "@chakra-ui/react";
 
