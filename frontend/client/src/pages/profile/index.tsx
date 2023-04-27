@@ -45,10 +45,10 @@ const Profile = () => {
           >
             <Avatar
               size = "2xl"
-              src = { userData.imageURI ? userData.imageURI : ""}
-              name = { !userData.imageURI ? userData.firstName + ' ' + userData.lastName : ""}
-              bg = { userData.imageURI ? 'transparent' : '#4f5e70'}
-              color = { userData.imageURI ? 'transparent' : 'white' }
+              src = { imageURI ? imageURI : ""}
+              name = { !imageURI ? firstName + ' ' + lastName : ""}
+              bg = { imageURI ? 'transparent' : '#4f5e70'}
+              color = { imageURI ? 'transparent' : 'white' }
               css = {{
                 "WebkitUserSelect": "none",
                 "msUserSelect": "none",
