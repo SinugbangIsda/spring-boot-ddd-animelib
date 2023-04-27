@@ -98,6 +98,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 border = "1px"
                 borderColor = "#383a40"
                 color = "white"
+                zIndex = "40"
               >
                 <Link to = "/profile">
                   <MenuItem 
