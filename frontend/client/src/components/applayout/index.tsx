@@ -35,7 +35,10 @@ const AppLayout = ({ children }: AppLayoutProps ) => {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen = { onOpen } />
-      <Box ml = {{ base: 0, md: 60 }} >
+      <Box 
+        ml = {{ base: 0, md: 60 }} 
+        position = "relative"
+      >
         { children }
       </Box>
     </Box>
