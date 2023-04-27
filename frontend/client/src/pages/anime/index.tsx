@@ -16,6 +16,7 @@ import {
 } from '../../redux/services/animeService';
 import { getUserAndToken } from '../../redux/slices/authSlice';
 import { 
+  Box,
   Button, 
   Divider, 
   Flex, 
@@ -114,134 +115,179 @@ const SelectedAnime = () => {
     <>
       <AppLayout>
         <Stack
-          spacing = { 4 }
-          p = { 4 }
+          w = "full"
+          h = "full"
           color = "white"
         >
-          <Flex 
-            color = "white"
-            align = "center"
-            justify = "space-between"
+          <Stack
+            position = "absolute"
+            w = "full"
+            zIndex = "1"
           >
-            <Link to = "/">
-              <Flex
-                _hover = {{
-                  "textDecoration": "underline"
-                }}
-              >
-                <IoIosArrowRoundBack size = "1.5em" />
-                <Text fontSize = "lg">
-                  Back
+            <Box 
+              position = "absolute"
+              bgGradient = "linear(to-r, black, transparent)"
+              w = "full"
+              h = "23em"
+            />
+            <Stack
+              position = "absolute"
+              spacing = { 4 }
+              p = { 4 }
+              w = "full"
+            >
+              <Stack>
+                <Flex 
+                  align = "center"
+                  justify = "space-between"
+                >
+                  <Link to = "/">
+                    <Flex
+                      _hover = {{
+                      "textDecoration": "underline"
+                      }}
+                    >
+                      <IoIosArrowRoundBack size = "1.5em" />
+                      <Text fontSize = "lg">
+                        Back
+                      </Text>
+                    </Flex>
+                  </Link>
+                  { userData.role === "admin" && (
+                    <Menu>
+                      <MenuButton 
+                        as = { IconButton } 
+                        bg = "#5f5e60"
+                        size = "sm"
+                        _hover = {{
+                          bg: "#444345"
+                        }}
+                        _active = {{
+                          bg: "#444345"
+                        }}
+                      >
+                        <SettingsIcon />
+                      </MenuButton>
+                      <MenuList
+                        bg = "#1A1B1E"
+                        border = "1px"
+                        borderColor = "#383a40"
+                      >
+                        <MenuItem 
+                          bg = "transparent"
+                          icon = { <EditIcon /> } 
+                          onClick = { drawer.onOpen }
+                          _hover = {{
+                            bg: "#25262b"
+                          }}
+                        >
+                          Edit
+                        </MenuItem>
+                        <MenuItem
+                          bg = "transparent"
+                          icon = { <DeleteIcon /> } 
+                          onClick = { modal.onOpen }
+                          _hover = {{
+                            bg: "#25262b"
+                          }}
+                        >
+                          Delete
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
+                  )}
+                </Flex>
+              </Stack>
+              <Stack>
+                <Flex 
+                  direction = {{ base: 'column', sm: 'row' }}
+                  align = {{ base: "center", md: "flex-start" }}
+                  textAlign = {{ base: "center", sm: "left" }}
+                >
+                  <Image
+                    src = { animeData.data?.imageURI }
+                    alt = { animeData.data?.title }
+                    w = "13em"
+                    h = "17em"
+                    objectFit = "cover"
+                    mr = { 4 }
+                  />
+                  <Stack
+                    letterSpacing = "widest"
+                    spacing = { 2 }
+                  >
+                    <Text
+                      fontSize = "3xl"
+                      as = "b"
+                    >
+                      { animeData.data?.title }
+                    </Text>
+                    <Text
+                      fontSize = "lg"
+                      as = "i"
+                    >
+                      { animeData.data?.altTitle }
+                    </Text>
+                    <Text>
+                      Type: { animeData.data?.type }
+                    </Text>
+                    <Text>
+                      Genre: { animeData.data?.genre }
+                    </Text>
+                    <Text>
+                      Status: { animeData.data?.status }
+                    </Text>
+                    <Text>
+                      Episodes: { animeData.data?.episodes }
+                    </Text>
+                    <Button
+                      bg = { checkIfAnimeAdded.data ?  "#797979" : "#E6613E"  }
+                      color = "white"
+                      _hover = {{
+                        bg: checkIfAnimeAdded.data ? "#4f4f4f" : "#d44f2e"
+                      }}
+                      w = "14em"
+                      h = "4em"
+                      p = { 6 }
+                      fontSize = "sm"
+                      onClick = { checkIfAnimeAdded.data ? handleRemoveFromWatchlist : handleAddToWatchlist }
+                    >
+                      { checkIfAnimeAdded.data ? "Remove from" : "Add to" } watchlist
+                    </Button>
+                  </Stack>
+                </Flex>
+              </Stack>
+              <Stack>
+                <Text
+                  fontSize = "2xl"
+                  fontWeight = "bold"
+                  mt = { 4}
+                >
+                  Synopsis
                 </Text>
-              </Flex>
-            </Link>
-            { userData.role === "admin" && (
-              <Menu>
-                <MenuButton 
-                  as = { IconButton } 
-                  color = "gray.600" 
-                  bg = "gray.300"
-                >
-                  <SettingsIcon />
-                </MenuButton>
-                <MenuList
-                  bg = "#1A1B1E"
-                  border = "1px"
-                  borderColor = "#383a40"
-                  color = "white"
-                >
-                  <MenuItem 
-                    bg = "transparent"
-                    icon = { <EditIcon /> } 
-                    onClick = { drawer.onOpen }
-                    _hover = {{
-                      bg: "#25262b"
-                    }}
-                  >
-                    Edit
-                  </MenuItem>
-                  <MenuItem
-                    bg = "transparent"
-                    icon = { <DeleteIcon /> } 
-                    onClick = { modal.onOpen }
-                    _hover = {{
-                      bg: "#25262b"
-                    }}
-                  >
-                    Delete
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            )}
-          </Flex>
-          <Flex 
-            direction = {{ base: 'column', sm: 'row' }}
-            align = {{ base: "center", md: "flex-start" }}
-            textAlign = {{ base: "center", sm: "left" }}
+                <Divider />
+                <Text>
+                  { animeData.data?.synopsis }
+                </Text>
+              </Stack>
+            </Stack>
+          </Stack>
+          <Stack
+            h = "full"
+            w = "full"
+            zIndex = "0"
+            top = "-2"
+            position = "relative" 
           >
-            <Image
+            <Image 
+              w = "full"
+              h = "23em"
               src = { animeData.data?.imageURI }
               alt = { animeData.data?.title }
-              w = "11em"
-              h = "15em"
-              objectFit = "cover"
-              mr = { 4 }
+              opacity = { 0.4 }
+              objectFit = "cover" 
             />
-            <Flex
-              direction = "column"
-              justify = "space-between"
-            >
-              <Text
-                fontSize = "3xl"
-                as = "b"
-              >
-                { animeData.data?.title }
-              </Text>
-              <Text
-                fontSize = "lg"
-                as = "i"
-              >
-                { animeData.data?.altTitle }
-              </Text>
-              <Text>
-                Type: { animeData.data?.type }
-              </Text>
-              <Text>
-                Genre: { animeData.data?.genre }
-              </Text>
-              <Text>
-                Status: { animeData.data?.status }
-              </Text>
-              <Text>
-                Episodes: { animeData.data?.episodes }
-              </Text>
-            </Flex>
-          </Flex>
-          <Stack w = {{ base: "100%", md: "11em" }}>
-            <Button
-              bg = { checkIfAnimeAdded.data ?  "gray.400" : "#d44f2e"  }
-              color = { checkIfAnimeAdded.data ? "gray.700" : "white" }
-              _hover = {{
-                bg: checkIfAnimeAdded.data ? "#25262b" : "#d44f2e"
-              }}
-              fontSize = "sm"
-              onClick = { checkIfAnimeAdded.data ? handleRemoveFromWatchlist : handleAddToWatchlist }
-              mr = { 2 }
-            >
-              { checkIfAnimeAdded.data ? "Remove from" : "Add to" } watchlist
-            </Button>
           </Stack>
-          <Text
-            fontSize = "2xl"
-            as = "h1"
-            fontWeight = "bold"
-          >
-            Synopsis
-          </Text>
-          <Divider />
-          <Text>
-            { animeData.data?.synopsis }
-          </Text>
         </Stack>
       </AppLayout>
       <AnimeMutationDrawer
