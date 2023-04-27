@@ -9,7 +9,7 @@ import {
   Stack,
   Text
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoIosArrowRoundBack } from 'react-icons/io';
 import { getUserAndToken } from '../../redux/slices/authSlice';
 import { User } from '../../interfaces';
@@ -18,6 +18,7 @@ const Profile = () => {
   const { user } = getUserAndToken();
   const userData: User = JSON.parse((user) as string);
   const { firstName, lastName, emailAddress, role, imageURI } = userData;
+  const navigate = useNavigate();
 
   return (
     <AppLayout>
@@ -27,18 +28,17 @@ const Profile = () => {
           color = "white"
         >
           <Flex color = "white">
-            <Link to = "/">
-              <Flex
-                _hover = {{
-                  "textDecoration": "underline"
-                }}
-              >
-                <IoIosArrowRoundBack size = "1.5em" />
-                <Text fontSize = "md">
-                  Back
-                </Text>
-              </Flex>
-            </Link>
+            <Flex
+              onClick = {() => navigate(-1)}
+              _hover = {{
+                "textDecoration": "underline"
+              }}
+            >
+              <IoIosArrowRoundBack size = "1.5em" />
+              <Text fontSize = "md">
+                Back
+              </Text>
+            </Flex>
           </Flex>
           <Stack
             spacing = { 8 }

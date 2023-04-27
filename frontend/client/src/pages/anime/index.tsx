@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { 
   Link, 
+  useNavigate, 
   useParams 
 } from "react-router-dom";
 import AppLayout from '../../components/applayout';
@@ -63,6 +64,7 @@ const SelectedAnime = () => {
   const drawer = useDisclosure();
   const modal = useDisclosure();
   const toast = useToast();
+  const navigate = useNavigate();
 
   const showToast = (title: string, status: "error"| "info" | "success"| "loading") => {
     toast({
@@ -141,18 +143,17 @@ const SelectedAnime = () => {
                   align = "center"
                   justify = "space-between"
                 >
-                  <Link to = "/">
-                    <Flex
-                      _hover = {{
+                  <Flex
+                    onClick = {() => navigate(-1)}
+                    _hover = {{
                       "textDecoration": "underline"
-                      }}
-                    >
-                      <IoIosArrowRoundBack size = "1.5em" />
-                      <Text fontSize = "lg">
-                        Back
-                      </Text>
-                    </Flex>
-                  </Link>
+                    }}
+                  >
+                    <IoIosArrowRoundBack size = "1.5em" />
+                    <Text fontSize = "lg">
+                      Back
+                    </Text>
+                  </Flex>
                   { userData.role === "admin" && (
                     <Menu>
                       <MenuButton 

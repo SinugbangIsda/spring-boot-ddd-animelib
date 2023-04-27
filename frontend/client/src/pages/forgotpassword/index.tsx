@@ -1,7 +1,7 @@
 import React, {
   useState
 } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle, IoIosArrowRoundBack } from "react-icons/all";
 import { 
   Box, 
@@ -29,6 +29,7 @@ const INITIAL_FORM_STATE: UserForgotPassword = {
 
 const ForgotPassword = () => {
   const [ formState, setFormState] = useState<UserForgotPassword>(INITIAL_FORM_STATE);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -107,22 +108,21 @@ const ForgotPassword = () => {
                 >
                   Submit
                 </Button>
-                <Link to = "/signin">
-                  <Flex
-                    align = "center"
-                    color = "white"
-                    _hover = {{
-                      "textDecoration": "underline"
-                    }}
-                  >
-                    <IoIosArrowRoundBack 
-                      size = "1.5em"
-                    />
-                    <Text>
-                      Go back to sign in
-                    </Text>
-                  </Flex>
-                </Link>
+                <Flex
+                  align = "center"
+                  color = "white"
+                  onClick = {() => navigate(-1)}
+                  _hover = {{
+                    "textDecoration": "underline"
+                  }}
+                >
+                  <IoIosArrowRoundBack 
+                    size = "1.5em"
+                  />
+                  <Text>
+                    Go back to sign in
+                  </Text>
+                </Flex>
               </Stack>
             </form>
           </Box>
