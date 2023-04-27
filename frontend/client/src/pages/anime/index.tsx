@@ -218,7 +218,7 @@ const SelectedAnime = () => {
                   >
                     <Text
                       fontSize = "3xl"
-                      as = "b"
+                      fontWeight = "bold"
                     >
                       { animeData.data?.title }
                     </Text>
@@ -246,7 +246,7 @@ const SelectedAnime = () => {
                       _hover = {{
                         bg: checkIfAnimeAdded.data ? "#4f4f4f" : "#d44f2e"
                       }}
-                      w = "14em"
+                      w = {{ base: "full", sm: "14em" }}
                       h = "4em"
                       p = { 6 }
                       fontSize = "sm"
