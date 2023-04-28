@@ -91,7 +91,7 @@ export interface AnimeMutationModalProps {
     data?: Anime;
     animeId: number | null;
     header: string | JSX.Element | JSX.Element[] | null;
-    refetch?: () => void;
+    refetch: () => void;
     isOpen: boolean;
     onClose: () => void;
 };
