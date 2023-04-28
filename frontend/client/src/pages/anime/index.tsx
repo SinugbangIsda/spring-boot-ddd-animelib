@@ -82,9 +82,9 @@ const SelectedAnime = () => {
 
   const handleAddToWatchlist = async () => {
     try { 
-      await addToWatchlist({ userId: userData.id, animeId: id });
-        showToast("Added to watchlist", "success");
-        checkIfAnimeAdded.refetch();
+      await addToWatchlist({ userId: userData.id, animeId: id })
+      .then(() => checkIfAnimeAdded.refetch());
+      showToast("Added to watchlist", "success");
     } catch(err: any) {
       if (!err.originalStatus) {
         showToast("No Server Response", "error");
@@ -98,9 +98,9 @@ const SelectedAnime = () => {
   
   const handleRemoveFromWatchlist = async () => {
     try {
-      await removeFromWatchlist({ userId: userData.id, animeId: id });
+      await removeFromWatchlist({ userId: userData.id, animeId: id })
+      .then(() => checkIfAnimeAdded.refetch());
       showToast("Removed from watchlist", "success");
-      checkIfAnimeAdded.refetch();
     } catch(err: any) {
       if (!err.originalStatus) {
         showToast("No Server Response", "error");

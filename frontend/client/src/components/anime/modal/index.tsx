@@ -38,11 +38,12 @@ const AnimeMutationModal = ({
 
     const handleDeleteAnime = async () => {
         try {
-            await deleteAnime({ animeId: animeId  }).unwrap();
+            await deleteAnime({ animeId: animeId  })
+            .unwrap()
+            .then(() => refetch());
             showToast("Anime deleted", "success");
             navigate("/")
             onClose();
-            refetch!();
         } catch(err: any) {
             if (!err.originalStatus) {
                 showToast("No Server Response", "error");

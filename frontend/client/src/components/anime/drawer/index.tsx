@@ -73,9 +73,10 @@ const AnimeMutationDrawer = ({
 
     const handleUpdateAnime = async () => {
         try {
-          await updateAnime(formValues).unwrap();
+          await updateAnime(formValues)
+          .unwrap()
+          .then(() => refetch());
           showToast("Anime updated", "success");
-          refetch();
           onClose();
         } catch(err: any) {
           if (!err.originalStatus) {
