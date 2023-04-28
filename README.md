@@ -63,6 +63,10 @@ npm run dev
 ```
 10. Go to `http://localhost:3000/` in your browser to access the web application.
 
+# API Documentation (Knife4j)
+1. Run `AnimelibApplication.java`.
+2. Go to `http://localhost:8123/doc.html#/home` in your browser to view the API Documentation.
+
 # System Screenshots
 ### Sign in Page
 ![signin.png](docs/assets/images/signin.png)
