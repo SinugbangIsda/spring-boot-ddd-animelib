@@ -145,7 +145,8 @@ const SelectedAnime = () => {
                   <Flex
                     onClick = {() => navigate(-1)}
                     _hover = {{
-                      "textDecoration": "underline"
+                      "textDecoration": "underline",
+                      "cursor": "pointer"
                     }}
                   >
                     <IoIosArrowRoundBack size = "1.5em" />

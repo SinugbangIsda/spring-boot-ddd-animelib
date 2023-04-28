@@ -106,7 +106,8 @@ const ForgotPassword = () => {
                   color = "white"
                   onClick = {() => navigate(-1)}
                   _hover = {{
-                    "textDecoration": "underline"
+                    "textDecoration": "underline",
+                    "cursor": "pointer"
                   }}
                 >
                   <IoIosArrowRoundBack 
