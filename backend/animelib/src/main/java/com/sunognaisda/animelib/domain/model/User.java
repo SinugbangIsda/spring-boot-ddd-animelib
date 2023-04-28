@@ -1,23 +1,39 @@
 package com.sunognaisda.animelib.domain.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
-@Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user")
+@TableName("user")
 public class User {
-    @Id
-    private String id;
+    @TableId(type = IdType.ASSIGN_ID)
+    private long id;
 
-    @Column(name = "username", length = 20, nullable = false)
-    private String username;
+    @TableField("last_name")
+    private String lastName;
 
-    @Column(name = "password", nullable = false)
+    @TableField("first_name")
+    private String firstName;
+
+    @TableField("email_address")
+    private String emailAddress;
+
+    @TableField("image_uri")
+    private String imageURI;
+
+    @TableField("role")
+    private String role;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 }

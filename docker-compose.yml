@@ -1,0 +1,16 @@
+version: '3.5'
+
+services:
+  mysql:
+    container_name: animelib
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Lol1234567$
+      MYSQL_DATABASE: animelib_db
+    volumes:
+      - mysql-db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+volumes:
+  mysql-db:
+    driver: local

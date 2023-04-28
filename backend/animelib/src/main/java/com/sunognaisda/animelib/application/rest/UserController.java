@@ -8,19 +8,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1/user")
 @CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;
 
     @PostMapping("register")
-    public ResponseEntity<User> registerUser(@RequestBody(required = true) User _user) {
-        try {
-            User user = userService.registerUser(_user);
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } catch (Exception e) {
-            return  new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
+    public void registerUser(@RequestBody User user){
+        userService.registerUser(user);
     }
+
+    @GetMapping("{user_id}")
+    public User loginUser(@PathVariable("user_id") long userId) {
+        return userService.loginUser(userId);
+    }
+
+//    @PostMapping("{user_id}/validate")
+//    public User validateUser(@PathVariable("user_id") long userId, @RequestBody(required = true) User _user) {
+//        return null;
+//    }
+
 }
