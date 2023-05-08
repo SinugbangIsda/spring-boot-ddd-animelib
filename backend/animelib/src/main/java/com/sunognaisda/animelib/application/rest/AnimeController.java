@@ -3,14 +3,10 @@ package com.sunognaisda.animelib.application.rest;
 import com.sunognaisda.animelib.domain.model.Anime;
 import com.sunognaisda.animelib.domain.model.Watchlist;
 import com.sunognaisda.animelib.domain.service.AnimeService;
-import com.sunognaisda.animelib.domain.service.WatchlistService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/anime")
@@ -49,8 +45,10 @@ public class AnimeController {
         animeService.updateAnimeById(anime);
     }
 
-    @DeleteMapping("{anime_id}")
+    @PutMapping("sd/{anime_id}")
     public void deleteAnimeById(@PathVariable("anime_id") long animeId) {
-        animeService.deleteAnimeById(animeId);
+        Anime anime = new Anime();
+        anime.setId(animeId);
+        animeService.deleteAnimeById(anime);
     }
 }

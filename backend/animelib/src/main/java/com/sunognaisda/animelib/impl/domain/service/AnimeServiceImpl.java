@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AnimeServiceImpl implements AnimeService {
@@ -42,11 +41,12 @@ public class AnimeServiceImpl implements AnimeService {
     }
 
     @Override
-    public void deleteAnimeById(long animeId) {
+    public void deleteAnimeById(Anime anime) {
         QueryWrapper<Watchlist> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("anime_id", animeId);
+        queryWrapper.eq("anime_id", anime.getId());
         watchlistMapper.delete(queryWrapper);
-        animeMapper.deleteById(animeId);
+        anime.setDeleted(true);
+        animeMapper.updateById(anime);
     }
 
     @Override
