@@ -16,7 +16,7 @@ public interface AnimeService {
 
     void updateAnimeById(Anime anime);
 
-    void deleteAnimeById(long animeId);
+    void deleteAnimeById(Anime anime);
 
     boolean checkIfAnimeInWatchlist(Watchlist watchlist);
 }
