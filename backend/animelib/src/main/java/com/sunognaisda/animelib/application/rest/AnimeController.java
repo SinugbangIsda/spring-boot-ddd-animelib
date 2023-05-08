@@ -49,8 +49,10 @@ public class AnimeController {
         animeService.updateAnimeById(anime);
     }
 
-    @DeleteMapping("{anime_id}")
+    @PutMapping("sd/{anime_id}")
     public void deleteAnimeById(@PathVariable("anime_id") long animeId) {
-        animeService.deleteAnimeById(animeId);
+        Anime anime = new Anime();
+        anime.setId(animeId);
+        animeService.deleteAnimeById(anime);
     }
 }
