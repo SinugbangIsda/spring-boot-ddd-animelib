@@ -28,7 +28,7 @@ public class AnimeServiceImplTests {
     @Order(2)
     public void testAddAnime() {
         Anime testAnime = new Anime();
-        testAnime.setId(3);
+        testAnime.setId(5);
         testAnime.setTitle("Test Title");
         testAnime.setAltTitle("Test Alt");
         testAnime.setType("Type");
@@ -47,21 +47,23 @@ public class AnimeServiceImplTests {
     @Order(3)
     public void testUpdateAnimeById() {
         Anime testAnime = new Anime();
-        testAnime.setId(3);
-        testAnime.setTitle("Alt Test Title #1");
+        testAnime.setId(5);
+        testAnime.setTitle("Alt Test Title #2");
         testAnime.setAltTitle("Test Alt");
         testAnime.setType("Type");
         testAnime.setEpisodes(1);
         testAnime.setStatus("Test Status");
         testAnime.setGenre("Test Genre");
         testAnime.setSynopsis("Test synopsis");
-        testAnime.setImageURI("test");
 
         animeService.updateAnimeById(testAnime);
     }
 
-//    @Test
-//    public void testDeleteAnimeById() {
-//
-//    }
+    @Test
+    public void testDeleteAnimeById() {
+        Anime testAnime = new Anime();
+        testAnime.setId(4);
+
+        animeService.deleteAnimeById(testAnime);
+    }
 }
