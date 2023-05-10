@@ -1,8 +1,8 @@
 package com.sunognaisda.animelib.impl.domain.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.sunognaisda.animelib.domain.mapper.AnimeMapper;
-import com.sunognaisda.animelib.domain.mapper.WatchlistMapper;
+import com.sunognaisda.animelib.domain.repository.AnimeRepository;
+import com.sunognaisda.animelib.domain.repository.WatchlistRepository;
 import com.sunognaisda.animelib.domain.model.Anime;
 import com.sunognaisda.animelib.domain.model.Watchlist;
 import com.sunognaisda.animelib.domain.service.AnimeService;
@@ -15,44 +15,16 @@ import java.util.List;
 public class AnimeServiceImpl implements AnimeService {
 
     @Autowired
-    private AnimeMapper animeMapper;
-    @Autowired
-    private WatchlistMapper watchlistMapper;
+    private AnimeRepository animeRepository;
 
-    @Override
-    public void addAnime(Anime anime) {
-        animeMapper.insert(anime);
-    }
-
-    @Override
-    public List<Anime> getAllAnime() {
-        return animeMapper.selectList(null);
-    }
-
-    @Override
-    public Anime getAnimeById(long animeId) {
-        return animeMapper.selectById(animeId);
-    }
-
-
-    @Override
-    public void updateAnimeById(Anime anime) {
-        animeMapper.updateById(anime);
-    }
+    private WatchlistRepository watchlistRepository;
 
     @Override
     public void deleteAnimeById(Anime anime) {
         QueryWrapper<Watchlist> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("anime_id", anime.getId());
-        watchlistMapper.delete(queryWrapper);
+        watchlistRepository.delete(queryWrapper);
         anime.setDeleted(true);
-        animeMapper.updateById(anime);
+        animeRepository.updateById(anime);
     }
-
-    @Override
-    public boolean checkIfAnimeInWatchlist(Watchlist watchlist) {
-        return watchlist.equals(watchlistMapper.selectByMultiId(watchlist));
-
-    }
-
 }
