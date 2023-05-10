@@ -4,13 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sunognaisda.animelib.application.dto.ErrorContent;
 import com.sunognaisda.animelib.application.dto.user.UserLoginRequest;
 import com.sunognaisda.animelib.application.dto.user.UserResponse;
-import com.sunognaisda.animelib.application.rest.service.JwtService;
-import com.sunognaisda.animelib.domain.mapper.UserMapper;
+import com.sunognaisda.animelib.application.rest.support.JwtService;
+import com.sunognaisda.animelib.domain.repository.UserRepository;
 import com.sunognaisda.animelib.domain.model.User;
 import com.sunognaisda.animelib.domain.service.UserService;
 import com.sunognaisda.animelib.infra.util.Sha512HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,7 @@ public class AuthController {
     private JwtService jwtService;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserRepository userRepository;
 
     @PostMapping("register")
     public void registerUser(@RequestBody User user){
@@ -40,7 +39,7 @@ public class AuthController {
         try {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("email_address", userLoginRequest.getEmailAddress());
-            Optional<User> queriedUser = Optional.ofNullable(userMapper.selectOne(queryWrapper));
+            Optional<User> queriedUser = Optional.ofNullable(userRepository.selectOne(queryWrapper));
             if (!queriedUser.isPresent()) {
                 throw new Exception("User not found");
             }
