@@ -8,15 +8,5 @@ import java.util.List;
 
 @Service
 public interface AnimeService {
-    void addAnime(Anime anime);
-
-    List<Anime> getAllAnime();
-
-    Anime getAnimeById(long animeId);
-
-    void updateAnimeById(Anime anime);
-
     void deleteAnimeById(Anime anime);
-
-    boolean checkIfAnimeInWatchlist(Watchlist watchlist);
 }
