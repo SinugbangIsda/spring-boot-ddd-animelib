@@ -2,6 +2,8 @@ package com.sunognaisda.animelib.application.rest;
 
 import com.sunognaisda.animelib.domain.model.Anime;
 import com.sunognaisda.animelib.domain.model.Watchlist;
+import com.sunognaisda.animelib.domain.repository.AnimeRepository;
+import com.sunognaisda.animelib.domain.repository.WatchlistRepository;
 import com.sunognaisda.animelib.domain.service.AnimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,21 +15,27 @@ import java.util.List;
 @CrossOrigin
 public class AnimeController {
     @Autowired
+    private AnimeRepository animeRepository;
+
+    @Autowired
     private AnimeService animeService;
+
+    @Autowired
+    private WatchlistRepository watchlistRepository;
 
     @PostMapping("add")
     public void addAnime(@RequestBody Anime anime) {
-        animeService.addAnime(anime);
+        animeRepository.insert(anime);
     }
 
     @GetMapping("")
     public List<Anime> getAllAnime() {
-        return animeService.getAllAnime();
+        return animeRepository.selectList(null);
     }
 
     @GetMapping("{anime_id}")
     public Anime getAnimeById(@PathVariable("anime_id") long animeId) {
-        return animeService.getAnimeById(animeId);
+        return animeRepository.selectById(animeId);
     }
 
     // Check if anime exists in watchlist.
@@ -36,13 +44,13 @@ public class AnimeController {
         Watchlist watchlist = new Watchlist();
         watchlist.setUserId(userId);
         watchlist.setAnimeId(animeId);
-        return animeService.checkIfAnimeInWatchlist(watchlist);
+        return watchlist.equals(watchlistRepository.selectByMultiId(watchlist));
     }
 
     @PutMapping("{anime_id}")
     public void updateAnimeById(@PathVariable("anime_id") long animeId, @RequestBody Anime anime) {
         anime.setId(animeId);
-        animeService.updateAnimeById(anime);
+        animeRepository.updateById(anime);
     }
 
     @PutMapping("sd/{anime_id}")
