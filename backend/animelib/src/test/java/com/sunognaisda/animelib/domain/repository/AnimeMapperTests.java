@@ -1,4 +1,4 @@
-package com.sunognaisda.animelib.domain.mapper;
+package com.sunognaisda.animelib.domain.repository;
 
 import com.sunognaisda.animelib.domain.model.Anime;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import java.util.List;
 @SpringBootTest
 public class AnimeMapperTests {
     @Autowired
-    private AnimeMapper animeMapper;
+    private AnimeRepository animeMapper;
 
     @Test
     public void testSelectList() {
