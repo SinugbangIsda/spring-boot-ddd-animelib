@@ -1,4 +1,4 @@
-package com.sunognaisda.animelib.infra.config.api;
+package com.sunognaisda.animelib.application.rest.support.config.api;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
