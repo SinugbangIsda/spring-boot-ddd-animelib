@@ -19,6 +19,16 @@ public class AnimeServiceImpl implements AnimeService {
     private WatchlistRepository watchlistRepository;
 
     @Override
+    public void addAnime(Anime anime) {
+        animeRepository.insert(anime);
+    }
+
+    @Override
+    public void updateAnimeById(Anime anime) {
+        animeRepository.updateById(anime);
+    }
+
+    @Override
     public void deleteAnimeById(Anime anime) {
         QueryWrapper<Watchlist> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("anime_id", anime.getId());
