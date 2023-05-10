@@ -15,6 +15,7 @@ public class AnimeServiceImpl implements AnimeService {
     @Autowired
     private AnimeRepository animeRepository;
 
+    @Autowired
     private WatchlistRepository watchlistRepository;
 
     @Override
