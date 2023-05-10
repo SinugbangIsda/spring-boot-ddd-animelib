@@ -1,4 +1,4 @@
-package com.sunognaisda.animelib.application.rest.service;
+package com.sunognaisda.animelib.application.rest.support;
 
 import com.sunognaisda.animelib.domain.model.User;
 import org.springframework.stereotype.Service;
