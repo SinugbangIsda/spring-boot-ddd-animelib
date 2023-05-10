@@ -25,7 +25,7 @@ public class AnimeController {
 
     @PostMapping("add")
     public void addAnime(@RequestBody Anime anime) {
-        animeRepository.insert(anime);
+        animeService.addAnime(anime);
     }
 
     @GetMapping("")
@@ -50,7 +50,7 @@ public class AnimeController {
     @PutMapping("{anime_id}")
     public void updateAnimeById(@PathVariable("anime_id") long animeId, @RequestBody Anime anime) {
         anime.setId(animeId);
-        animeRepository.updateById(anime);
+        animeService.updateAnimeById(anime);
     }
 
     @PutMapping("sd/{anime_id}")
