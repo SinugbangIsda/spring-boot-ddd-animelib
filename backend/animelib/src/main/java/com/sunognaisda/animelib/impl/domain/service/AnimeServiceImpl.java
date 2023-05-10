@@ -9,8 +9,6 @@ import com.sunognaisda.animelib.domain.service.AnimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class AnimeServiceImpl implements AnimeService {
 
