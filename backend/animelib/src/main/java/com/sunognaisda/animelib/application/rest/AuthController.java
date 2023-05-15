@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -38,14 +40,15 @@ public class AuthController {
     public ResponseEntity<UserResponse> loginUser (@RequestBody UserLoginRequest userLoginRequest) {
         try {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("email_address", userLoginRequest.getEmailAddress());
+            queryWrapper.eq("email_address", userLoginRequest.emailAddress());
             Optional<User> queriedUser = Optional.ofNullable(userRepository.selectOne(queryWrapper));
-            if (!queriedUser.isPresent()) {
+
+            if (queriedUser.isEmpty()) {
                 throw new Exception("User not found");
             }
 
             // Check credentials
-            String password = userLoginRequest.getPassword();
+            String password = userLoginRequest.password();
             String dbHashedPassword = queriedUser.get().getPassword();
             boolean verifyPassword = Sha512HashUtil.verifyPassword(password, dbHashedPassword);
 
@@ -63,10 +66,5 @@ public class AuthController {
                     .body(new UserResponse(null, null, new ErrorContent("Login Error", e.getMessage())));
         }
     }
-
-    //    @PostMapping("{user_id}/validate")
-    //    public User validateUser(@PathVariable("user_id") long userId, @RequestBody(required = true) User _user) {
-    //        return null;
-    //    }
 
 }
