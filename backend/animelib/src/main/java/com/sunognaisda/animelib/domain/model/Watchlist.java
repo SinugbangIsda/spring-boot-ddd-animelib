@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -22,6 +24,15 @@ public class Watchlist {
     @MppMultiId
     @TableField("anime_id")
     private long animeId;
+
+    @TableField("created_at")
+    private LocalDateTime createdAt;
+
+    @TableField("updated_at")
+    private LocalDateTime updatedAt;
+
+    @TableField("is_deleted")
+    private boolean isDeleted;
 }
 
 
