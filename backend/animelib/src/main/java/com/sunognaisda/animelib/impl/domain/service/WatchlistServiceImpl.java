@@ -20,11 +20,6 @@ public class WatchlistServiceImpl implements WatchlistService {
     }
 
     @Override
-    public List<Anime> getWatchlistByUserId(long userId) {
-        return watchlistRepository.getAllAnimeInWatchlist(userId);
-    }
-
-    @Override
     public void deleteAnimeFromWatchlist(Watchlist watchlist) {
         watchlistRepository.deleteByMultiId(watchlist);
     }
