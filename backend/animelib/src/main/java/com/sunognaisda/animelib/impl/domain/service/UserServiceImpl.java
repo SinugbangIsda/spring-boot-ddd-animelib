@@ -20,9 +20,4 @@ public class UserServiceImpl implements UserService {
         user.setPassword(hashedPassword);
         userRepository.insert(user);
     }
-
-    @Override
-    public User loginUser(long userId) {
-       return userRepository.selectById(userId);
-    }
 }
