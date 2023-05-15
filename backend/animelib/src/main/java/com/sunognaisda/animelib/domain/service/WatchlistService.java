@@ -9,9 +9,6 @@ import java.util.List;
 @Service
 public interface WatchlistService {
     void addToWatchlist(Watchlist watchlist);
-
-    List<Anime> getWatchlistByUserId(long userId);
-
     void deleteAnimeFromWatchlist(Watchlist watchlist);
 
 
