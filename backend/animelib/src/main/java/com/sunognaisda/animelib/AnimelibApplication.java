@@ -8,7 +8,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableMPP
-@MapperScan("com.sunognaisda.animelib.domain.mapper")
+@MapperScan("com.sunognaisda.animelib.domain.repository")
 @EnableSwagger2
 public class AnimelibApplication {
 

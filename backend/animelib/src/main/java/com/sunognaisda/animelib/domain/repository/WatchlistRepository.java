@@ -14,5 +14,5 @@ public interface WatchlistRepository extends MppBaseMapper<Watchlist> {
             "FROM watchlist " +
             "INNER JOIN anime ON watchlist.anime_id = anime.id " +
             "WHERE user_id = ${id};")
-    List<Anime> getAllAnimeInWatchlist(long id);
+    List<Anime> getWatchlistByUserId(long id);
 }

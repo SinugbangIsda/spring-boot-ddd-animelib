@@ -5,5 +5,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface AnimeService {
+    void addAnime(Anime anime);
+
+    void updateAnimeById(Anime anime);
+
     void deleteAnimeById(Anime anime);
 }
