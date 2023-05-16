@@ -1,0 +1,43 @@
+<!ELEMENT dataset (
+        anime*,
+        user*,
+        watchlist*)>
+
+<!ELEMENT anime (#PCDATA)>
+<!ATTLIST anime
+        alt_title CDATA #REQUIRED
+        created_at CDATA #REQUIRED
+        episodes CDATA #REQUIRED
+        genre CDATA #REQUIRED
+        id CDATA #REQUIRED
+        image_uri CDATA #REQUIRED
+        is_deleted CDATA #REQUIRED
+        status CDATA #REQUIRED
+        synopsis CDATA #REQUIRED
+        title CDATA #REQUIRED
+        type CDATA #REQUIRED
+        updated_at CDATA #REQUIRED
+>
+
+<!ELEMENT user (#PCDATA)>
+<!ATTLIST user
+        created_at CDATA #REQUIRED
+        email_address CDATA #REQUIRED
+        first_name CDATA #REQUIRED
+        id CDATA #REQUIRED
+        image_uri CDATA #REQUIRED
+        is_deleted CDATA #REQUIRED
+        last_name CDATA #REQUIRED
+        password CDATA #REQUIRED
+        role CDATA #REQUIRED
+        updated_at CDATA #REQUIRED
+>
+
+<!ELEMENT watchlist (#PCDATA)>
+<!ATTLIST watchlist
+        anime_id CDATA #REQUIRED
+        created_at CDATA #REQUIRED
+        is_deleted CDATA #REQUIRED
+        updated_at CDATA #REQUIRED
+        user_id CDATA #REQUIRED
+>
