@@ -29,9 +29,7 @@ CREATE TABLE IF NOT EXISTS watchlist
 (
     user_id BIGINT UNSIGNED,
     anime_id BIGINT UNSIGNED,
-    PRIMARY KEY (user_id, anime_id),
-    FOREIGN KEY (user_id) REFERENCES user(id),
-    FOREIGN KEY (anime_id) REFERENCES anime(id)
+    PRIMARY KEY (user_id, anime_id)
 );
 
 -- changeset liquibase:2
