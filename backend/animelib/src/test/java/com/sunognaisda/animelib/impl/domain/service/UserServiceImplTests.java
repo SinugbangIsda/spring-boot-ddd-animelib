@@ -5,6 +5,7 @@ import com.github.database.rider.core.api.dataset.DataSet;
 import com.sunognaisda.animelib.SpringBootBaseTest;
 import com.sunognaisda.animelib.domain.model.User;
 import com.sunognaisda.animelib.domain.repository.UserRepository;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,8 +21,11 @@ public class UserServiceImplTests extends SpringBootBaseTest {
     @Autowired
     UserServiceImpl userService;
 
+    // User Registration Tests
     @Test
-    void testRegisterUser_UserIsRegistered() {
+    @Order(1)
+    void testRegisterUser_RegistrationSuccessful() {
+        // Test User Data
         User testUser = new User();
         testUser.setLastName("Dalangin");
         testUser.setFirstName("Raphael");
@@ -38,4 +42,14 @@ public class UserServiceImplTests extends SpringBootBaseTest {
 
         assertThat(queriedUser).isPresent();
     }
+
+//    @Test
+//    @Order(2)
+//    void testRegisterUser_RegistrationFailed() {
+//        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.eq("email_address", "NO_VALUE");
+//        Optional<User> queriedUser = Optional.ofNullable(userRepository.selectOne(queryWrapper));
+//
+//        assertThat(queriedUser).isEmpty();
+//    }
 }
