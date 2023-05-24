@@ -27,12 +27,21 @@ public class WatchlistRepositoryTests {
 
     @Test
     @Order(1)
-
-    void testGetWatchlistByUserId_ListComplete() {
+    void testGetWatchlistByUserId_ShouldReturnCompleteList() {
         long userId = 1;
 
         List<Anime> watchlist = watchlistRepository.getWatchlistByUserId(userId);
 
         assertThat(watchlist.size()).isEqualTo(2);
+    }
+
+    @Test
+    @Order(2)
+    void testGetWatchlistByUserId_ShouldReturnNoList() {
+        long userId = 0;
+
+        List<Anime> watchlist = watchlistRepository.getWatchlistByUserId(userId);
+
+        assertThat(watchlist.size()).isEqualTo(0);
     }
 }
