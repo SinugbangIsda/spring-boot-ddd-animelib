@@ -5,15 +5,11 @@ import com.github.database.rider.core.api.dataset.DataSet;
 import com.sunognaisda.animelib.SpringBootBaseTest;
 import com.sunognaisda.animelib.domain.model.User;
 import com.sunognaisda.animelib.domain.repository.UserRepository;
-import com.sunognaisda.animelib.domain.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataSet("db/datasets/user.xml")

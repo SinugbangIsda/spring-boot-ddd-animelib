@@ -5,7 +5,6 @@ import com.github.database.rider.core.api.configuration.Orthography;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
 import com.sunognaisda.animelib.domain.model.Anime;
-import com.sunognaisda.animelib.domain.model.Watchlist;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
