@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS user
     id SERIAL PRIMARY KEY,
     last_name VARCHAR(30),
     first_name VARCHAR(30),
-    email_address VARCHAR(50),
+    email_address VARCHAR(50) UNIQUE,
     password VARCHAR(255),
     image_uri TEXT,
     role VARCHAR(10)
