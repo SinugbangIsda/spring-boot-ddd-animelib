@@ -156,7 +156,9 @@
 					<password>${db.pass}</password>
 					<type>CLEAN_INSERT</type>
 					<sources>
-						src/test/resources/db/datasets/anime.xml
+						<src>src/test/resources/db/datasets/anime.xml</src>
+						<src>src/test/resources/db/datasets/user.xml</src>
+						<src>src/test/resources/db/datasets/watchlist.xml</src>
 					</sources>
 				</configuration>
 			</plugin>
