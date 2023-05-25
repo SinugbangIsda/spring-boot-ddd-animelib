@@ -5,6 +5,7 @@ import com.github.database.rider.core.api.dataset.DataSet;
 import com.sunognaisda.animelib.SpringBootBaseTest;
 import com.sunognaisda.animelib.domain.model.User;
 import com.sunognaisda.animelib.domain.repository.UserRepository;
+import com.sunognaisda.animelib.domain.service.UserService;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class UserServiceImplTests extends SpringBootBaseTest {
     UserRepository userRepository;
 
     @Autowired
-    UserServiceImpl userService;
+    UserService userService;
 
     // User Registration Tests
     @Test
