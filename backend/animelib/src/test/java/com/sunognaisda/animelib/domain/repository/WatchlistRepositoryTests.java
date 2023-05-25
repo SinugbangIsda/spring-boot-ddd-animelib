@@ -5,6 +5,7 @@ import com.github.database.rider.core.api.configuration.Orthography;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
 import com.sunognaisda.animelib.domain.model.Anime;
+import com.sunognaisda.animelib.domain.model.Watchlist;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -43,5 +45,15 @@ public class WatchlistRepositoryTests {
         List<Anime> watchlist = watchlistRepository.getWatchlistByUserId(userId);
 
         assertThat(watchlist.size()).isEqualTo(0);
+    }
+
+    @Test
+    @Order(3)
+    void testSelectActiveEntryByMultiId() {
+        long userId = 1;
+        long animeId = 2;
+
+        Optional<Watchlist> queriedEntry = watchlistRepository.selectUserEntryByMultiId(userId, animeId);
+        assertThat(queriedEntry).isPresent();
     }
 }
