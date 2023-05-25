@@ -4,5 +4,7 @@
 <dataset>
     <anime id="1" title="Naruto" alt_title="Naruto Shippuden" type="TV" episodes="100" status="Completed" genre="Action" synopsis="Ninjas fighting." image_uri="a" created_at="2023-05-03 06:58:39" updated_at="2023-05-03 06:58:39" is_deleted="0"/>
     <anime id="2" title="Attack on Titan" alt_title="AoT" type="TV" episodes="50" status="Completed" genre="Fantasy" synopsis="BIG people fighting." image_uri="b" created_at="2023-05-03 06:58:39" updated_at="2023-05-03 06:58:39" is_deleted="0"/>
-    <anime id="3" title="Test Anime 1" alt_title="Alt Test 1" type="OVA" episodes="3" status="Ongoing" genre="Slice of Life" synopsis="No fighting." image_uri="c" created_at="2023-05-03 06:58:39" updated_at="2023-05-03 06:58:39" is_deleted="1"/>
+    <anime id="3" title="Demon Slayer" alt_title="Kimetsu no Yaiba" type="TV" episodes="5" status="Ongoing" genre="Action" synopsis="A lot of demons fighting." image_uri="c" created_at="2023-05-03 06:58:39" updated_at="2023-05-03 06:58:39" is_deleted="0"/>
+    <anime id="4" title="Test Deleted Anime 1" alt_title="Alt Test 1" type="Movie" episodes="1" status="Completed" genre="Slice of Life" synopsis="Deleted fighting." image_uri="e" created_at="2023-05-03 06:58:39" updated_at="2023-05-03 06:58:39" is_deleted="1"/>
+    <anime id="5" title="Test Anime 1" alt_title="Alt Test 1" type="OVA" episodes="3" status="Ongoing" genre="Slice of Life" synopsis="No fighting." image_uri="d" created_at="2023-05-03 06:58:39" updated_at="2023-05-03 06:58:39" is_deleted="0"/>
 </dataset>
