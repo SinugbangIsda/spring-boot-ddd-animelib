@@ -19,7 +19,7 @@ public class UserRepositoryTests extends SpringBootBaseTest {
 
     @Test
     @Order(1)
-    void testGetUserByEmail_UserIsFound() {
+    void testGetUserByEmail_WhenUserIsFound_ShouldReturnUserData() {
         String queriedEmail = "Bontes@gmail.com";
 
         Optional<User> queriedUser = userRepository.getUserByEmail(queriedEmail);
@@ -29,7 +29,7 @@ public class UserRepositoryTests extends SpringBootBaseTest {
 
     @Test
     @Order(2)
-    void testGetUserByEmail_UserIsNotFound() {
+    void testGetUserByEmail_WhenUserIsNotFound_ShouldReturnEmpty() {
         String queriedEmail = "NO EMAIL";
 
         Optional<User> queriedUser = userRepository.getUserByEmail(queriedEmail);
@@ -39,7 +39,7 @@ public class UserRepositoryTests extends SpringBootBaseTest {
 
     @Test
     @Order(3)
-    void testGetUsersByRole_RoleExists() {
+    void testGetUsersByRole_WhenRoleExists_ShouldReturnAllUsersUnderRole() {
         String queriedRole = "user";
 
         List<User> queriedUsers = userRepository.getUsersByRole(queriedRole);
@@ -49,7 +49,7 @@ public class UserRepositoryTests extends SpringBootBaseTest {
 
     @Test
     @Order(4)
-    void testGetUsersByRole_RoleDoesNotExist() {
+    void testGetUsersByRole_WhenRoleDoesNotExist_ShouldReturnEmpty() {
         String queriedRole = "empty";
 
         List<User> queriedUsers = userRepository.getUsersByRole(queriedRole);
@@ -59,7 +59,7 @@ public class UserRepositoryTests extends SpringBootBaseTest {
 
     @Test
     @Order(5)
-    void testGetAllActiveUsers() {
+    void testGetAllActiveUsers_WhenCalled_ShouldReturnAllUserDataWhereIsDeletedIsZero() {
         List<User> queriedUsers = userRepository.getAllActiveUsers();
 
         assertThat(queriedUsers).isNotEmpty();
