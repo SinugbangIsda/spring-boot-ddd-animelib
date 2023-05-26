@@ -19,35 +19,35 @@ public class AnimeRepositoryTests extends SpringBootBaseTest {
 
     @Test
     @Order(1)
-    void testGetActiveAnimeById_EntryExistsAndIsActive() {
+    void testGetActiveAnimeById_WhenEntryExistsAndIsActive_ShouldReturnAnimeData() {
         Optional<Anime> queriedAnime = animeRepository.getActiveAnimeById(1);
         assertThat(queriedAnime).isPresent();
     }
 
     @Test
     @Order(2)
-    void testGetActiveAnimeById_EntryDoesNotExist() {
+    void testGetActiveAnimeById_EntryDoesNotExist_ShouldReturnEmpty() {
         Optional<Anime> queriedAnime = animeRepository.getActiveAnimeById(0);
         assertThat(queriedAnime).isEmpty();
     }
 
     @Test
     @Order(3)
-    void testGetActiveAnimeById_EntryIsNotActive() {
+    void testGetActiveAnimeById_EntryIsNotActive_ShouldReturnEmpty() {
         Optional<Anime> queriedAnime = animeRepository.getActiveAnimeById(4);
         assertThat(queriedAnime).isEmpty();
     }
 
     @Test
     @Order(4)
-    void testGetAllActiveAnime() {
+    void testGetAllActiveAnime_WhenCalled_ShouldReturnAllAnimeWhereIsDeletedIsZero() {
         List<Anime> queriedAnime = animeRepository.getAllActiveAnime();
         assertThat(queriedAnime).isNotEmpty();
     }
 
     @Test
     @Order(5)
-    void testGetAnimeByType_TypeExists() {
+    void testGetAnimeByType_WhenTypeExists_ShouldReturnAllAnimeUnderChosenType() {
         String queriedType = "TV";
 
         List<Anime> queriedAnime = animeRepository.getAnimeByType(queriedType);
@@ -57,7 +57,7 @@ public class AnimeRepositoryTests extends SpringBootBaseTest {
 
     @Test
     @Order(6)
-    void testGetAnimeByType_TypeNotFound() {
+    void testGetAnimeByType_WhenTypeNotFound_ShouldReturnEmpty() {
         String queriedType = "None";
 
         List<Anime> queriedAnime = animeRepository.getAnimeByType(queriedType);
@@ -67,7 +67,7 @@ public class AnimeRepositoryTests extends SpringBootBaseTest {
 
     @Test
     @Order(7)
-    void testGetAnimeByStatus_ValidStatus() {
+    void testGetAnimeByStatus_WhenValidStatus_ShouldReturnAllAnimeWithThatStatus() {
         String queriedStatus = "Completed";
 
         List<Anime> queriedAnime = animeRepository.getAnimeByStatus(queriedStatus);
@@ -77,7 +77,7 @@ public class AnimeRepositoryTests extends SpringBootBaseTest {
 
     @Test
     @Order(8)
-    void testGetAnimeByStatus_InvalidStatus() {
+    void testGetAnimeByStatus_WhenInvalidStatus_ShouldReturnEmpty() {
         String queriedStatus = "Incompleted";
 
         List<Anime> queriedAnime = animeRepository.getAnimeByStatus(queriedStatus);
@@ -87,7 +87,7 @@ public class AnimeRepositoryTests extends SpringBootBaseTest {
 
     @Test
     @Order(9)
-    void testGetAnimeByGenre_GenreExists() {
+    void testGetAnimeByGenre_WhenGenreExists_ShouldReturnAllAnimeUnderThatGenre() {
         String queriedGenre = "Action";
 
         List<Anime> queriedAnime = animeRepository.getAnimeByGenre(queriedGenre);
@@ -97,7 +97,7 @@ public class AnimeRepositoryTests extends SpringBootBaseTest {
 
     @Test
     @Order(10)
-    void testGetAnimeByGenre_GenreDoesNotExist() {
+    void testGetAnimeByGenre_WhenGenreDoesNotExist_ShouldReturnEmpty() {
         String queriedGenre = "No Action";
 
         List<Anime> queriedAnime = animeRepository.getAnimeByGenre(queriedGenre);
