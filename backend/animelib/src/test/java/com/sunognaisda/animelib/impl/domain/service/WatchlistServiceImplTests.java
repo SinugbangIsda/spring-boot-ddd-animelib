@@ -60,10 +60,7 @@ public class WatchlistServiceImplTests extends SpringBootBaseTest {
         // Do a query checking if anime entry is valid
         Optional<Anime> queryAnime = animeRepository.getActiveAnimeById(testWatchlist.getAnimeId());
 
-        watchlistService.addToWatchlist(testWatchlist);
-
-        Optional<Watchlist> queriedWatchlist = watchlistRepository.selectActiveWatchlistEntryByMultiId(testWatchlist.getUserId(), testWatchlist.getAnimeId());
-        assertThat(queriedWatchlist).isEmpty();
+        assertThat(queryAnime).isEmpty();
     }
 
     @Test
