@@ -25,7 +25,7 @@ public class UserServiceImplTests extends SpringBootBaseTest {
     // User Registration Tests
     @Test
     @Order(1)
-    void testRegisterUser_RegistrationSuccessful() {
+    void testRegisterUser_WhenUserRegisters_ShouldAddUserDataToDatabase() {
         // Test User Data
         User testUser = new User();
         testUser.setLastName("Dalangin");
@@ -46,11 +46,6 @@ public class UserServiceImplTests extends SpringBootBaseTest {
 
 //    @Test
 //    @Order(2)
-//    void testRegisterUser_RegistrationFailed() {
-//        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-//        queryWrapper.eq("email_address", "NO_VALUE");
-//        Optional<User> queriedUser = Optional.ofNullable(userRepository.selectOne(queryWrapper));
-//
-//        assertThat(queriedUser).isEmpty();
+//    void testRegisterUser_WhenThereIsMissingInformation_ShouldFailToRegister() {
 //    }
 }
