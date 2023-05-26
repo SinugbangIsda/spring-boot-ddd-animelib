@@ -13,6 +13,10 @@ public class WatchlistServiceImpl implements WatchlistService {
 
     @Override
     public void addToWatchlist(Watchlist watchlist) {
+        /* Features to add:
+        - Check if entry is already in watchlist.
+        - If entry is already added to watchlist, check if `is_deleted` is set to 0 or 1.
+         */
         watchlistRepository.insert(watchlist);
     }
 
