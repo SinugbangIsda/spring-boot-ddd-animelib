@@ -24,7 +24,7 @@ public class AnimeServiceImplTests extends SpringBootBaseTest {
 
     @Test
     @Order(1)
-    void testAddAnime_EntryIsAddedSuccessfully() {
+    void testAddAnime_WhenAnimeIsAdded_ShouldAddAnimeEntryToDatabase() {
         // Set Test Values
         Anime testAnime = new Anime();
         testAnime.setTitle("Test Title");
@@ -49,7 +49,7 @@ public class AnimeServiceImplTests extends SpringBootBaseTest {
 
     @Test
     @Order(2)
-    void testUpdateAnimeById_EntryIsUpdatedSuccessfully() {
+    void testUpdateAnimeById_WhenEntryIsUpdated_ShouldUpdateAnimeEntry() {
         Anime testAnime = new Anime();
         testAnime.setId(5);
         testAnime.setTitle("Altered Title");
@@ -72,35 +72,11 @@ public class AnimeServiceImplTests extends SpringBootBaseTest {
 
     @Test
     @Order(3)
-    void testSoftDeleteAnimeById() {
+    void testSoftDeleteAnimeById_WhenAnimeIsSoftDeleted_ShouldSetIsDeletedToOne() {
         Anime testAnime = new Anime();
         testAnime.setId(6);
         animeService.softDeleteAnimeById(testAnime);
 
         animeRepository.getActiveAnimeById(6);
     }
-
-//    @Test
-//    @Order(3)
-//    public void testUpdateAnimeById() {
-//        Anime testAnime = new Anime();
-//        testAnime.setId(5);
-//        testAnime.setTitle("Alt Test Title #2");
-//        testAnime.setAltTitle("Test Alt");
-//        testAnime.setType("Type");
-//        testAnime.setEpisodes(1);
-//        testAnime.setStatus("Test Status");
-//        testAnime.setGenre("Test Genre");
-//        testAnime.setSynopsis("Test synopsis");
-//
-//        animeService.updateAnimeById(testAnime);
-//    }
-
-//    @Test
-//    public void testDeleteAnimeById() {
-//        Anime testAnime = new Anime();
-//        testAnime.setId(4);
-//
-//        animeService.deleteAnimeById(testAnime);
-//    }
 }
