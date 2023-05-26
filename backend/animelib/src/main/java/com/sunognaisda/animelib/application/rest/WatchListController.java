@@ -37,6 +37,6 @@ public class WatchListController {
         Watchlist watchlist = new Watchlist();
         watchlist.setUserId(userId);
         watchlist.setAnimeId(animeId);
-        watchlistService.deleteAnimeFromWatchlist(watchlist);
+        watchlistService.softDeleteAnimeFromWatchlist(watchlist);
     }
 }

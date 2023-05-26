@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dataset SYSTEM "database.dtd">
+
+<dataset>
+    <user id="1" last_name="Weed" first_name="James" email_address="james@weed.com" image_uri="a" role="admin" password="f6bea20826285287e710a4a391cdcf3bfeea16b40a9aa57d2083f4b835e2629c7dbb0c3937ff1166a01cfe91257a6bcb99c418e9e711bd6bbc320234071407a7" created_at="2023-05-15 07:10:45" updated_at="2023-05-15 07:10:45" is_deleted="0"/>
+    <user id="2" last_name="Montes" first_name="Bon" email_address="Bontes@gmail.com" image_uri="b" role="user" password="f6bea20826285287e710a4a391cdcf3bfeea16b40a9aa57d2083f4b835e2629c7dbb0c3937ff1166a01cfe91257a6bcb99c418e9e711bd6bbc320234071407a7" created_at="2023-05-15 07:10:45" updated_at="2023-05-15 07:10:45" is_deleted="0"/>
+    <user id="3" last_name="Jauriju" first_name="Johnson" email_address="johnson@jauriju.com" image_uri="c" role="user" password="f6bea20826285287e710a4a391cdcf3bfeea16b40a9aa57d2083f4b835e2629c7dbb0c3937ff1166a01cfe91257a6bcb99c418e9e711bd6bbc320234071407a7" created_at="2023-05-15 07:10:45" updated_at="2023-05-15 07:10:45" is_deleted="1"/>
+</dataset>

@@ -9,5 +9,5 @@ public interface AnimeService {
 
     void updateAnimeById(Anime anime);
 
-    void deleteAnimeById(Anime anime);
+    void softDeleteAnimeById(Anime anime);
 }

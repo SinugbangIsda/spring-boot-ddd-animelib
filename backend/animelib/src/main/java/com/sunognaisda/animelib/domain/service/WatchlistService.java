@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface WatchlistService {
     void addToWatchlist(Watchlist watchlist);
-    void deleteAnimeFromWatchlist(Watchlist watchlist);
+    void softDeleteAnimeFromWatchlist(Watchlist watchlist);
 
 
 }

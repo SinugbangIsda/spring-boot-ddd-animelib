@@ -17,7 +17,8 @@ public class WatchlistServiceImpl implements WatchlistService {
     }
 
     @Override
-    public void deleteAnimeFromWatchlist(Watchlist watchlist) {
-        watchlistRepository.deleteByMultiId(watchlist);
+    public void softDeleteAnimeFromWatchlist(Watchlist watchlist) {
+        watchlist.setDeleted(true);
+        watchlistRepository.updateByMultiId(watchlist);
     }
 }

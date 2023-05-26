@@ -57,6 +57,6 @@ public class AnimeController {
     public void deleteAnimeById(@PathVariable("anime_id") long animeId) {
         Anime anime = new Anime();
         anime.setId(animeId);
-        animeService.deleteAnimeById(anime);
+        animeService.softDeleteAnimeById(anime);
     }
 }

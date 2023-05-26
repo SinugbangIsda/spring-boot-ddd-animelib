@@ -29,10 +29,13 @@ public class AnimeServiceImpl implements AnimeService {
     }
 
     @Override
-    public void deleteAnimeById(Anime anime) {
+    public void softDeleteAnimeById(Anime anime) {
+        // Delete the watchlist records containing the anime
         QueryWrapper<Watchlist> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("anime_id", anime.getId());
         watchlistRepository.delete(queryWrapper);
+
+        // Set `is_deleted` to 1
         anime.setDeleted(true);
         animeRepository.updateById(anime);
     }
